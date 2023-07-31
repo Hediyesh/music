@@ -35,6 +35,7 @@ namespace DataLayer
         public string youtubeAddress { get; set; }
         public string singerName { get; set; }
         public int likes { get; set; }
+        public int viewCount { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Comments> Comments { get; set; }

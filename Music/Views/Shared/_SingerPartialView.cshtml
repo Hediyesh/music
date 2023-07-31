@@ -1,0 +1,18 @@
+﻿@model IEnumerable<SingerViewModel>
+    <div class="row">
+        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+            <h5 style="color:antiquewhite">Singers</h5>
+            <hr />
+            @{ var i = 1;}
+            @foreach (var item in Model)
+            {
+                <p style="color:aliceblue" onclick="singerPage(@item.Id)">@i)@item.name</p>
+                i += 1;
+            }
+
+            <a style="color:antiquewhite" href="/Home/SingersPage"> More...</a>
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+    </div>
+

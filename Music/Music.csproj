@@ -131,6 +131,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\GenreViewModel.cs" />
+    <Compile Include="Models\MusicViewModel.cs" />
+    <Compile Include="Models\SingerViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -138,7 +141,9 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -156,12 +161,17 @@
     <Content Include="pics\ProfilePic\default-avatar-profile-icon-set-collection-anonymous-social-media-default-avatar-profile-icon-set-collection-anonymous-social-176237699 %282%29.jpg" />
     <Content Include="pics\SongPic\220px-Nirvana_Inna.jpg" />
     <Content Include="pics\SongPic\44611da694049c53e065a642081da377.500x500x1.jpg" />
-    <Content Include="pics\SongPic\artworks-000107957921-l3f0bk-t500x500.jpg" />
     <Content Include="pics\SongPic\bc53ebe06c0c39d16990e14e1439d802.1000x1000x1.jpg" />
     <Content Include="pics\SongPic\Taylor-Swift-–-Afterglow-Lyrics.jpg" />
     <Content Include="pics\SongPic\Taylor_Swift_-_The_Man.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="Content\fa.4.3.0" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -173,9 +183,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Site.js" />
     <Content Include="Songs\01 - Love Talk %28English Version%29.mp3" />
     <Content Include="Songs\5-Seconds-Of-Summer-High-128.mp3" />
-    <Content Include="Songs\Gz Band - Bargard.mp3" />
     <Content Include="Songs\Nirvana - INNA.mp3" />
     <Content Include="Songs\Taylor-Swift-Afterglow-128.mp3" />
     <Content Include="Songs\Taylor-Swift-The-Man-128.mp3" />
@@ -193,10 +203,13 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Shared\_contentPartialView.cshtml" />
+    <Content Include="Views\Shared\_SuggestPartialView.cshtml" />
+    <Content Include="Views\Shared\_SingerPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

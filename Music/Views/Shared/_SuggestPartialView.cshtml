@@ -1,0 +1,15 @@
+﻿@model IEnumerable<MusicViewModel>
+    <div class="row">
+        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+            <h5 style="color:antiquewhite">Suggested Songs</h5>
+            <hr style="color:black" />
+            @{ var i = 1;}
+            @foreach (var item in Model)
+            {
+                <p onclick="page(@item.Id)" style="color:white">@i)@item.name by @item.singerName</p>
+                i++;
+            }
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+    </div>

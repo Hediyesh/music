@@ -35,7 +35,7 @@ namespace DataLayer
         public virtual DbSet<LikedSongText> LikedSongText { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Singer> Singer { get; set; }
-        public virtual DbSet<Song> Song { get; set; }
         public virtual DbSet<SongGroup> SongGroup { get; set; }
+        public virtual DbSet<Song> Song { get; set; }
     }
 }

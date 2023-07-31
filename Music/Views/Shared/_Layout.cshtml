@@ -3,38 +3,65 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Contents/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <div class="row">
+        <nav id="nav" class="navbar navbar-fixed-top navbar-collapse" style="background-color: lightgray;width:100%;margin-left:0px">
+            <div class="row">
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-11 " style="margin-top:7px">
+                    <h4 onclick="Home()"><strong><i>MUSIC </i><sub>IS MY</sub><i> PASSION</i></strong></h4>
+                    @*where user login*@
+                </div>
+                <div class="col-xs-2"></div>
+                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-11 ">
+                    <form style="margin-top:7px;margin-bottom:5px">
+                        <input class="form-control" type="text" id="searchtext" placeholder="search" style="width: 90%;display: inline-block" value="" /><a href='' onclick="this.href = '/Home/Search/' + document.getElementById('searchtext').value" class="btn btn-sm" style="width:10%;display:inline-block;height:32px;color:black;background-color:darkgrey"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>                        
+                    </form>
+                </div>
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
 
+        </nav>
+    </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br class="visible-xs" />
+    <br class="visible-xs" />
+    <br class="visible-xs" />
+    <div class="row">
+        <div class="col-lg-1 col-md-1"></div>
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12" id="content">
+            @RenderBody()
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 thumbnail" style="border:1px;border-color:white;border-style:solid;background-color: rgb(177, 139, 139);margin-right:5px;margin-left:1px" id="sidebar2">
+            @Html.Action("SingersPartial", "Home", new { area = "" })
+            <hr />
+            <hr />
+            @Html.Action("SuggestPartial", "Home", new { area = "" })
+        </div>
+        <div class="col-lg-1 col-md-1"></div>
+    </div>
+    <br />
+    <br />
+    <div class="row text-center" id="footer" style="border:1px;border-style:solid;background-color:gray;opacity:0.7;">
+        <br />
+        <p style="display:inline-block;color:aliceblue;margin-left:5px"><span title="Phone" style="height:30px;width:30px" class="glyphicon glyphicon-earphone"></span></p>
+        <p style="display:inline-block;color:aliceblue;margin-left:5px;margin-right:5px"><span title="Email" style="height:30px;width:30px" class="glyphicon glyphicon-envelope"></span></p>
+        <p style="display:inline-block;color:aliceblue;margin-left:5px"><span title="Telegram" style="height:30px;width:30px" class="glyphicon glyphicon-send"></span></p>
+        <p style="display:inline-block;color:aliceblue;margin-left:5px"><span title="Cloud" style="height:30px;width:30px" class="glyphicon glyphicon-cloud"></span></p>
+    </div>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/Site.js"></script>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
