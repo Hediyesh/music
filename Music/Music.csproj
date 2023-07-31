@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -45,6 +46,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -135,6 +142,24 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="pics\GenrePic\156038.jpg" />
+    <Content Include="pics\GenrePic\2014LedZeppelin_Getty85233808_250414-1.jpg" />
+    <Content Include="pics\GenrePic\ap-guitar-1129349_1920-1000x666.jpg" />
+    <Content Include="pics\GenrePic\GettyImages-1157424811.jpg" />
+    <Content Include="pics\GenrePic\Indie-Rock-Guitar-385x284.jpg" />
+    <Content Include="pics\GenrePic\pg-30-womens-job-ap.jpg" />
+    <Content Include="pics\GenrePic\Screen Shot 2018-09-14 at 15.15.32.png" />
+    <Content Include="pics\GenrePic\shutterstock_517774291.jpg" />
+    <Content Include="pics\microfono.jpg" />
+    <Content Include="pics\photo-1513829596324-4bb2800c5efb.jpg" />
+    <Content Include="pics\piano-1655558_960_720.jpg" />
+    <Content Include="pics\ProfilePic\default-avatar-profile-icon-set-collection-anonymous-social-media-default-avatar-profile-icon-set-collection-anonymous-social-176237699 %282%29.jpg" />
+    <Content Include="pics\SongPic\220px-Nirvana_Inna.jpg" />
+    <Content Include="pics\SongPic\44611da694049c53e065a642081da377.500x500x1.jpg" />
+    <Content Include="pics\SongPic\artworks-000107957921-l3f0bk-t500x500.jpg" />
+    <Content Include="pics\SongPic\bc53ebe06c0c39d16990e14e1439d802.1000x1000x1.jpg" />
+    <Content Include="pics\SongPic\Taylor-Swift-–-Afterglow-Lyrics.jpg" />
+    <Content Include="pics\SongPic\Taylor_Swift_-_The_Man.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -148,6 +173,12 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Songs\01 - Love Talk %28English Version%29.mp3" />
+    <Content Include="Songs\5-Seconds-Of-Summer-High-128.mp3" />
+    <Content Include="Songs\Gz Band - Bargard.mp3" />
+    <Content Include="Songs\Nirvana - INNA.mp3" />
+    <Content Include="Songs\Taylor-Swift-Afterglow-128.mp3" />
+    <Content Include="Songs\Taylor-Swift-The-Man-128.mp3" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -179,6 +210,12 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataLayer\DataLayer.csproj">
+      <Project>{2ac0cfb1-ef8c-4274-b700-ef90cc8c7b7d}</Project>
+      <Name>DataLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -213,7 +250,10 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
   </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
