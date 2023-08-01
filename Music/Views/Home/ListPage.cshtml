@@ -1,0 +1,39 @@
+﻿@model IEnumerable<MusicViewModel>
+@{
+    ViewBag.Title = "ListPage";
+}
+@Html.AntiForgeryToken()
+<div class="row">
+    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+        <h3 style="color:lightgray;margin-right:5px">List of Songs</h3>
+        <hr />
+        <input class="hidden" id="pageid" value="@ViewBag.Id" />
+        <div class="row" id="pg">
+            @foreach (var item in Model)
+            {
+                <div class="thumbnail col-lg-3 col-md-3 col-sm-5 col-xs-5" style="margin-right: 5px;border: 10px; width: 186px; height: 210px; background-color:lightgray; opacity: 0.7">
+                    <img src="@item.pic" style="height:100px;width:120px" />
+                    <br />
+                    <b>Song: @item.name</b><br />
+                    <b>Singer: @item.singerName</b><br />
+                    <span class="glyphicon glyphicon-share" aria-hidden="true"></span><p><a href="/Home/SongPage/@item.Id">More...</a></p>
+                </div>
+            }
+        </div>
+        <div class="row text-center">
+            @if (ViewBag.PageCount > 0)
+            {
+                for (int i = 1; i <= ViewBag.PageCount; i++)
+                {
+                    <button class="btn btn-default btn-sm center PagingButtons" style="color:white;background-color:gray" onclick="Pagination(@i)">@i</button>
+                }
+            }
+        </div>
+        <br />
+        <div class="row thumbnail" style="border:1px;border-style:solid;border-color:darkgrey;background-color:darkgray;opacity:0.6">
+            <p style="color:aliceblue">@ViewBag.Tags</p>
+        </div>
+    </div>
+    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+</div>

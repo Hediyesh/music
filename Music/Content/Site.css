@@ -5,3 +5,25 @@
     overflow-y: scroll;
     overflow-x: scroll;
 }
+.samerow {
+    display: inline-block;
+}
+
+.ltr {
+    direction: ltr
+}
+
+.rtl {
+    direction: rtl
+}
+
+.note {
+    background: rgba(128, 128, 128, 0.1);
+}
+
+.sharelink {
+    color: darksalmon;
+    background: rgba(128, 128, 128, 0.1);
+    margin: 2px;
+    width: 100%;
+}

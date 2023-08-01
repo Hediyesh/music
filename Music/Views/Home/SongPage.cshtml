@@ -1,0 +1,180 @@
+﻿@model MusicViewModel
+@{
+    ViewBag.Title = "SongPage";
+}
+@Html.AntiForgeryToken()
+<input type="hidden" id="musicid" value="@Model.Id" />
+<div class="row thumbnail" style="border: 1px;border-style: solid;border-color: blanchedalmond;background-color: blanchedalmond;opacity: 1">
+    <div class="row">
+        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+        <div class="col-lg-4 col-md-4 col-sm-5 col-xs-11">
+            <img src="@Model.pic" class="img-circle" style="width:200px;height:200px;margin-top:5px" />
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-1 col-xs-1"></div>
+        <div class="col-lg-4 col-md-4 col-sm-5 col-xs-11" style="margin-top:20px;color:lightcoral">
+            <p>Song: @Model.name</p>
+            <p>Singer: @Model.singerName</p>
+            <p>Number of views: <b id="viewCount">@Model.viewCount</b></p>
+            <p>Likes: <b id="likes">@Model.likes</b></p>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <p class="samerow"><span id="heart" onclick="ToggleHeart(@User.Identity.Name,@Model.Id); " title="like" class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span></p>
+            }
+            <div class="dropdown">
+                <p class="samerow"><span onclick="CopyClip(); $('.dropdown-menu').slideToggle();" title="share" class="glyphicon glyphicon-share" aria-hidden="true"></span></p>
+                <div class="dropdown-menu">
+                    <div class="row" style="margin:auto 5px ">
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+                            <a class="btn btn-sm sharelink" href="https://telegram.me/share/url?url=https://localhost:44391/Home/nav&text=<TEXT>">Telegram <span class="glyphicon glyphicon-send"></span></a>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+                            <a class="btn btn-sm sharelink" href="whatsapp://send?text=This is WhatsApp sharing example using link" data-action="share/whatsapp/share"
+                               target="https://localhost:44391/Home/nav">WhatsApp <i class="fa fa-whatsapp" aria-hidden="true"></i></a>
+                        </div><br />
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+                            <a href="https://twitter.com/share" class="btn btn-sm sharelink" data-url="http://c-sharp-corner.blogspot.in/2012/06/social-share-buttons-in-aspnet.html" data-text="Enter Data text here" data-size="large" data-count="none">Twitter <i class="fa fa-twitter" aria-hidden="true"></i></a>
+                            <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = "//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); } }(document, "script", "twitter-wjs");</script>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 ">
+                            <a class="btn btn-sm sharelink" href="https://mail.google.com/mail/?view=cm&fs=1&to=someone@example.com&su=SUBJECT&body=BODY&bcc=someone.else@example.com">Email <span class="glyphicon glyphicon-envelope"></span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>@*SharePage()*@
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 "></div>
+        <div class="col-lg-6 col-md-6 col-sm-11 col-xs-11" style="margin-top:20px;color:white">
+            <audio controls="controls">
+                <source src="@Model.fileLocation" type="audio/mpeg" />
+            </audio>
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 "></div>
+        <div class="col-lg-4 col-md-4 col-sm-11 col-xs-11">
+            <a href="@Model.youtubeAddress" style="color:rosybrown">Watch in YouTube</a>
+        </div>
+        <div class="col-lg-1 col-md-1"></div>
+    </div>
+    <div style="border:1px;border-color:white;border-style:solid;background-color:white;margin-bottom:7px;margin-top:7px"></div>
+    <div class="row text-center">
+        <p class="samerow" style="opacity:1;color:lightcoral;">Lyrics</p>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <span id="star" title="star" style="width:30px;height:30px;color:royalblue" onclick="TogglrStar(@User.Identity.Name,@Model.Id)" class="glyphicon glyphicon-star-empty samerow"></span>
+        }
+    </div>
+    <div style="border:1px;border-color:white;border-style:solid;background-color:white"></div>
+    <div class="row">
+        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+            <pre class="note" id="note" style="color:black;">@Model.note</pre>
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+    </div>
+</div>
+
+@* comments*@
+<div class="row thumbnail" id="Nazarat" style="border:1px;border-style:solid;background-color:gainsboro;border-color:white">
+    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+        <h5 style="color:dimgray;"><b style="margin-right:15px">Comments :@ViewBag.CommentsCount</b></h5>
+        <input type="hidden" id="replied" value="0" />
+        <hr />
+        @if (User.Identity.IsAuthenticated)
+        {
+            <p style="color:darksalmon;margin-right:15px" id="replyWarning"></p>
+        }
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="row thumbnail" style="border:1px;border-style:solid;background-color:gainsboro;border-color:white;margin: 7px auto">
+                <input type="hidden" value="0" id="commentid" />
+                <textarea id="comment" placeholder="Your Comment" style="width:100%"></textarea>
+                <button id="sabtnazar" onclick="SabtNazar(@User.Identity.Name,0)" class="btn btn-success btn-sm col-lg-6 col-md-6 col-sm-6 col-xs-6 samerow">Comment</button>
+                <button id="sabtvirayesh" onclick="SabtNazar(@User.Identity.Name,1)" class="btn btn-success btn-sm col-lg-6 col-md-6 col-sm-6 col-xs-6 samerow">Edit</button>
+                <button onclick="Cancel()" class="btn btn-danger btn-sm col-lg-6 col-md-6 col-sm-6 col-xs-6 samerow">Cancel</button>
+            </div>
+        }
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <p style="color:lightcoral;margin-right:15px"> Please Login For Commenting.</p>
+        }
+        <hr />
+        <div id="commentha" class="row thumbnail" style="border:1px;border-style:solid;background-color:gainsboro;border-color:white;margin: 7px auto">
+            @foreach (var item in ViewBag.Comments)
+            {
+                <div class="row" id="@item.id">
+                    <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 ">
+                        <img id="img@(item.id)" style="width:80px;height:80px;" class="img-circle pull-left" src="@item.userpic" />
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-8 col-xs-8 thumbnail" style="background-color:papayawhip;margin:7px auto;">
+                        <b class="samerow">username</b>: <p class="samerow" id="pname@(item.id)">@item.username</p>
+                        <br />
+                        <b class="samerow">text</b>: <p class="samerow" id="ptext@(item.id)" style="font-size:smaller">@item.text</p>
+                        <br />
+                        <p id="ptime@(item.id)" class="samerow" style="font-size:smaller;color:gray">@item.createDateString</p>
+                        <span onclick="Reply(@item.id)" onmousemove="Mousein(this)" onmouseout="Mouseout(this)" id="reply" style="color:gray" class="samerow glyphicon glyphicon-reply pull-left">reply</span>
+                    </div>
+                </div>
+                <div class="row" id="editdel@(item.id)">
+                    <div class="col-lg-2 col-md-2 col-sm-3 col-xs-3 "></div>
+                    <div class="col-lg-9 col-md-9 col-sm-8 col-xs-8">
+                        @if (User.Identity.Name == item.userid.ToString())
+                        {
+                            <button id="virayesh1@(item.id)" onclick="Virayesh(@item.id,@item.replied)" class="btn-sm btn btn-primary pull-left">Edit</button>
+                            <button id="hazf1@(item.id)" onclick="Hazf(@item.id,@item.replied)" class="btn-sm btn btn-danger pull-left">Delete</button>
+                        }
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                </div>
+                <div class="row" id="replied@(item.id)">
+                    @foreach (var item2 in ViewBag.RepliedComments)
+                    {
+                        if (item2.replied == item.id)
+                        {
+                            <div class="row" id="repliedComment@(item2.id)">
+                                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 "></div>
+                                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 ">
+                                    <img style="width:80px;height:80px;" class="img-circle pull-left" src="@item2.userpic" />
+                                </div>
+                                <div class="col-lg-7 col-md-7 col-sm-6 col-xs-6 thumbnail" style="background-color:antiquewhite;margin:7px auto">
+                                    <b class="samerow">username</b>: <p class="samerow">@item2.username</p><br />
+                                    <b class="samerow">text</b>: <p class="samerow" id="repcomtext@(item2.id)" style="font-size:smaller">@item2.text</p>
+                                    <br />
+                                    <p style="font-size:smaller;color:gray">@item2.createDateString</p>
+                                </div>
+                                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 "></div>
+                            </div>
+                            <div class="row" id="editdelete@(item2.id)">
+                                <div class="col-lg-3 col-md-3 col-sm-5 col-xs-5 ">
+                                </div>
+                                <div class="col-lg-7 col-md-7 col-sm-6 col-xs-6">
+                                    @if (User.Identity.Name == item2.userid.ToString())
+                                    {
+                                        <button id="virayesh2@(item2.id)" onclick="Virayesh(@item2.id,@item2.replied)" class="btn-sm btn btn-primary pull-left">Edit</button>
+                                        <button id="hazf2@(item2.id)" onclick="Hazf(@item2.id,@item2.replied)" class="btn-sm btn btn-danger pull-left">Delete</button>
+                                    }
+
+                                </div>
+                                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 "></div>
+                            </div>
+
+                        }
+                    }
+                </div>
+            }
+
+
+        </div>
+    </div>
+    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+    
+</div>
+<div class="row thumbnail" style="border:1px;border-style:solid;border-color:darkgrey;background-color:darkgray;opacity:0.6">
+    <p style="color:aliceblue">@ViewBag.Tags</p>
+</div>
+<input class="hidden" type="text" id="identityname" value="@User.Identity.Name" />
+<input class="hidden" type="text" id="urlval" value="" />
+<input class="hidden" type="text" id="lang" value="@Model.languageId" />
+<script src="~/Scripts/Song.js"></script>
