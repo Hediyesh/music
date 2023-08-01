@@ -3,11 +3,11 @@
     ViewBag.Title = "Home Page";
 }
 <br class="visible-xs" />
-<div id="newest" class="row" style="border-style: solid; border-color: white;">
+<div id="newest" class="row">
     <div class="row" style="font-size: 20px; margin-right: 4px; color: lightgray">
         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-            <a style="color:white" href="/Home/ListPageDate">Newest Songs</a>
+            <a style="color:lightgray" href="/Home/ListPageDate">Newest Songs</a>
             <hr />
         </div>
         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
@@ -25,12 +25,12 @@
                 {
                     i++;
                     <p id="i" class="hide">@i</p>
-                    <div id="song@(i)" class="thumbnail col-lg-3 col-md-3 col-sm-5 col-xs-5" style="margin-right: 10px;border: 1px; width: 190px; height: 210px; background-color: antiquewhite; opacity: 0.8">
+                    <div id="song@(i)" class="thumbnail col-lg-3 col-md-3 col-sm-5 col-xs-5" style="margin-right: 10px;border: 1px; width: 190px; height: 210px; background-color: rosybrown; opacity: 0.8">
                         <img src="@item.pic" style="height:100px;width:120px" />
                         <br />
                         <b>Song: @item.name</b><br />
                         <b>Singer: @item.singerName</b><br />
-                        <p><a href="/Home/SongPage/@item.Id">More info...</a></p>
+                        <a href="/Home/SongPage/@item.Id"><p  style="color:darkslategray">More info...</p></a>
                     </div>
 
                 }
@@ -40,11 +40,13 @@
     </div>
 </div>
 <br />
-<div id="viewedmost" class="row" style="border-style: solid; border-color: white;">
+<br />
+<br />
+<div id="viewedmost" class="row">
     <div class="row" style="font-size: 20px;margin-right:4px;color:lightgray">
         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-            <a style="color:white" href="/Home/ListPageViewCount">Most Viewed Songs</a>
+            <a style="color:lightgray" href="/Home/ListPageViewCount">Most Viewed Songs</a>
             <hr />
         </div>
         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
@@ -62,12 +64,12 @@
                 {
                     j++;
                     <p id="j" class="hide">@j</p>
-                    <div id="song2@(j)" class="thumbnail col-lg-3 col-md-3 col-sm-5 col-xs-5" style="margin-right: 10px;border: 1px; width: 190px; height: 210px; background-color:antiquewhite; opacity: 0.8">
+                    <div id="song2@(j)" class="thumbnail col-lg-3 col-md-3 col-sm-5 col-xs-5" style="margin-right: 10px;border: 1px; width: 190px; height: 210px; background-color:rosybrown; opacity: 0.8">
                         <img src="@item.pic" style="height:100px;width:120px" />
                         <br />
                         <b>Song: @item.name</b><br />
                         <b>Singer: @item.singerName</b><br />
-                        <p><a href="/Home/SongPage/@item.Id">More info...</a></p>
+                        <a href="/Home/SongPage/@item.Id"><p  style="color:darkslategray">More info...</p></a>
                     </div>
                 }
             </div>
@@ -75,5 +77,7 @@
         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
     </div>
 </div>
+<br />
+<br />
 <br />
 @Html.Action("GenresPartial", "Home", new { area = "" })

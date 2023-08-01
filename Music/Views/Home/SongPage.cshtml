@@ -2,16 +2,15 @@
 @{
     ViewBag.Title = "SongPage";
 }
-@Html.AntiForgeryToken()
 <input type="hidden" id="musicid" value="@Model.Id" />
-<div class="row thumbnail" style="border: 1px;border-style: solid;border-color: blanchedalmond;background-color: blanchedalmond;opacity: 1">
+<div class="row thumbnail" style="border: 1px;border-style: solid;border-color: blanchedalmond;background-color: lightgray;opacity: 1">
     <div class="row">
         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
         <div class="col-lg-4 col-md-4 col-sm-5 col-xs-11">
             <img src="@Model.pic" class="img-circle" style="width:200px;height:200px;margin-top:5px" />
         </div>
         <div class="col-lg-3 col-md-3 col-sm-1 col-xs-1"></div>
-        <div class="col-lg-4 col-md-4 col-sm-5 col-xs-11" style="margin-top:20px;color:lightcoral">
+        <div class="col-lg-4 col-md-4 col-sm-5 col-xs-11" style="margin-top:20px;color:black">
             <p>Song: @Model.name</p>
             <p>Singer: @Model.singerName</p>
             <p>Number of views: <b id="viewCount">@Model.viewCount</b></p>
@@ -46,26 +45,26 @@
     <br />
     <div class="row">
         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 "></div>
-        <div class="col-lg-6 col-md-6 col-sm-11 col-xs-11" style="margin-top:20px;color:white">
+        <div class="col-lg-6 col-md-6 col-sm-11 col-xs-11" style="margin-top:20px;color:black">
             <audio controls="controls">
                 <source src="@Model.fileLocation" type="audio/mpeg" />
             </audio>
         </div>
         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 "></div>
         <div class="col-lg-4 col-md-4 col-sm-11 col-xs-11">
-            <a href="@Model.youtubeAddress" style="color:rosybrown">Watch in YouTube</a>
+            <a href="@Model.youtubeAddress" style="color: brown">Watch in YouTube</a>
         </div>
         <div class="col-lg-1 col-md-1"></div>
     </div>
     <div style="border:1px;border-color:white;border-style:solid;background-color:white;margin-bottom:7px;margin-top:7px"></div>
     <div class="row text-center">
-        <p class="samerow" style="opacity:1;color:lightcoral;">Lyrics</p>
+        <p class="samerow" style="opacity:1;color:black;">Lyrics</p>
         @if (User.Identity.IsAuthenticated)
         {
             <span id="star" title="star" style="width:30px;height:30px;color:royalblue" onclick="TogglrStar(@User.Identity.Name,@Model.Id)" class="glyphicon glyphicon-star-empty samerow"></span>
         }
     </div>
-    <div style="border:1px;border-color:white;border-style:solid;background-color:white"></div>
+    <div style="border:1px;border-color:white;border-style:solid;background-color:black"></div>
     <div class="row">
         <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
         <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
@@ -170,9 +169,6 @@
     </div>
     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
     
-</div>
-<div class="row thumbnail" style="border:1px;border-style:solid;border-color:darkgrey;background-color:darkgray;opacity:0.6">
-    <p style="color:aliceblue">@ViewBag.Tags</p>
 </div>
 <input class="hidden" type="text" id="identityname" value="@User.Identity.Name" />
 <input class="hidden" type="text" id="urlval" value="" />

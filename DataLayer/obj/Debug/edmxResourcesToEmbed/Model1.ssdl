@@ -36,16 +36,6 @@
     <Property Name="RegisterDate" Type="datetime" Nullable="false" />
     <Property Name="bio" Type="nvarchar" MaxLength="500" />
   </EntityType>
-  <EntityType Name="KeyWords">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" Nullable="false" />
-    <Property Name="name" Type="nvarchar" MaxLength="200" Nullable="false" />
-    <Property Name="songid" Type="int" />
-    <Property Name="singerid" Type="int" />
-    <Property Name="genreid" Type="int" />
-  </EntityType>
   <EntityType Name="Language">
     <Key>
       <PropertyRef Name="Id" />
@@ -317,7 +307,6 @@
     <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Genre" EntityType="Self.Genre" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Karbar" EntityType="Self.Karbar" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="KeyWords" EntityType="Self.KeyWords" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LikedSingers" EntityType="Self.LikedSingers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LikedSongs" EntityType="Self.LikedSongs" Schema="dbo" store:Type="Tables" />

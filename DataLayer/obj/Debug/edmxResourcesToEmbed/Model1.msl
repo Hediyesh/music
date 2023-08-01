@@ -40,17 +40,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="KeyWords">
-      <EntityTypeMapping TypeName="MyMusicDBModel.KeyWords">
-        <MappingFragment StoreEntitySet="KeyWords">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="songid" ColumnName="songid" />
-          <ScalarProperty Name="singerid" ColumnName="singerid" />
-          <ScalarProperty Name="genreid" ColumnName="genreid" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Language">
       <EntityTypeMapping TypeName="MyMusicDBModel.Language">
         <MappingFragment StoreEntitySet="Language">
@@ -105,32 +94,32 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Song">
+      <EntityTypeMapping TypeName="MyMusicDBModel.Song">
+        <MappingFragment StoreEntitySet="Song">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="singerId" ColumnName="singerId" />
+          <ScalarProperty Name="languageId" ColumnName="languageId" />
+          <ScalarProperty Name="genreId" ColumnName="genreId" />
+          <ScalarProperty Name="releaseDate" ColumnName="releaseDate" />
+          <ScalarProperty Name="filelocation" ColumnName="filelocation" />
+          <ScalarProperty Name="groupId" ColumnName="groupId" />
+          <ScalarProperty Name="pic" ColumnName="pic" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="youtubeAddress" ColumnName="youtubeAddress" />
+          <ScalarProperty Name="singerName" ColumnName="singerName" />
+          <ScalarProperty Name="likes" ColumnName="likes" />
+          <ScalarProperty Name="viewCount" ColumnName="viewCount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="SongGroup">
       <EntityTypeMapping TypeName="MyMusicDBModel.SongGroup">
         <MappingFragment StoreEntitySet="SongGroup">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="parentId" ColumnName="parentId" />
           <ScalarProperty Name="name" ColumnName="name" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Song">
-      <EntityTypeMapping TypeName="MyMusicDBModel.Song">
-        <MappingFragment StoreEntitySet="Song">
-          <ScalarProperty Name="viewCount" ColumnName="viewCount" />
-          <ScalarProperty Name="likes" ColumnName="likes" />
-          <ScalarProperty Name="singerName" ColumnName="singerName" />
-          <ScalarProperty Name="youtubeAddress" ColumnName="youtubeAddress" />
-          <ScalarProperty Name="Note" ColumnName="Note" />
-          <ScalarProperty Name="pic" ColumnName="pic" />
-          <ScalarProperty Name="groupId" ColumnName="groupId" />
-          <ScalarProperty Name="filelocation" ColumnName="filelocation" />
-          <ScalarProperty Name="releaseDate" ColumnName="releaseDate" />
-          <ScalarProperty Name="genreId" ColumnName="genreId" />
-          <ScalarProperty Name="languageId" ColumnName="languageId" />
-          <ScalarProperty Name="singerId" ColumnName="singerId" />
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

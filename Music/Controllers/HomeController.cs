@@ -109,7 +109,6 @@ namespace Music.Controllers
             m.youtubeAddress = q.youtubeAddress;
             m.likes = q.likes;
             m.viewCount = q.viewCount;
-            ViewBag.Tags = string.Join(",", db.KeyWords.Where(w => w.songid == id).Select(s => s.name).ToList());
             var comments = db.Comments.Where(w => w.songid == id).ToList();
             var comment1 = comments.Where(w => w.replied == 0).Select(s => s).OrderByDescending(o => o.Id).ToList();
             var comment2 = comments.Where(w => w.replied != 0).Select(s => s).OrderByDescending(o => o.Id).ToList();
@@ -174,7 +173,6 @@ namespace Music.Controllers
                 m.viewCount = item.viewCount;
                 ml.Add(m);
             }
-            ViewBag.Tags = string.Join(",", db.KeyWords.Where(w => w.songid != null).Select(s => s.name).ToList());
             var c = db.Song.Count();
             int take = 8;
             ViewBag.PageCount = (c / take) + 1;
@@ -291,7 +289,6 @@ namespace Music.Controllers
                 m.viewCount = item.viewCount;
                 ml.Add(m);
             }
-            ViewBag.Tags = string.Join(",", db.KeyWords.Where(w => w.genreid == id).Select(s => s.name).ToList());
             var c = q.Count();
             int take = 8;
             ViewBag.PageCount = (c / take) + 1;
@@ -351,6 +348,218 @@ namespace Music.Controllers
             }
             return View(gl);
         }
+        public ActionResult SingerSongsPage(int id)
+        {
+            var q = db.Singer.Where(w => w.Id == id);
+            var q2 = q.Join(db.Song, p => p.Id, d => d.singerId, (p, d) => new { p, d }).Select(m => new
+            {
+                singerId = m.p.Id,
+                singername = m.p.name,
+                singergpid = m.p.groupId,
+                singergenreid = m.p.genreId,
+                singerlanid = m.p.languageId,
+                musicid = m.d.Id,
+                musicName = m.d.name,
+                musicgnre = m.d.genreId,
+                musicgpid = m.d.groupId,
+                musiclanid = m.d.languageId,
+                musicdate = m.d.releaseDate,
+                musicfilelocation = m.d.filelocation,
+                musicnote = m.d.Note,
+                musicpic = m.d.pic,
+                musiclikes = m.d.likes,
+                musicViews = m.d.viewCount
+            });
+            var q3 = q2.Join(db.Language, p => p.musiclanid, d => d.Id, (p, d) => new { p, d }).Select(m => new
+            {
+                m.p.musicdate,
+                m.p.musicfilelocation,
+                m.p.musicgnre,
+                m.p.musicgpid,
+                m.p.musicid,
+                m.p.musiclanid,
+                m.p.musiclikes,
+                m.p.musicName,
+                m.p.musicnote,
+                m.p.musicpic,
+                m.p.musicViews,
+                m.p.singergenreid,
+                m.p.singergpid,
+                m.p.singerId,
+                m.p.singerlanid,
+                m.p.singername,
+                musiclanName = m.d.name
+            });
+            var q4 = q3.Join(db.Genre, p => p.musicgnre, d => d.Id, (p, d) => new { p, d }).Select(m => new
+            {
+                m.p.musicdate,
+                m.p.musicfilelocation,
+                m.p.musicgnre,
+                m.p.musicgpid,
+                m.p.musicid,
+                m.p.musiclanid,
+                m.p.musiclikes,
+                m.p.musicName,
+                m.p.musicnote,
+                m.p.musicpic,
+                m.p.musicViews,
+                m.p.singergenreid,
+                m.p.singergpid,
+                m.p.singerId,
+                m.p.singerlanid,
+                m.p.singername,
+                m.p.musiclanName,
+                musicgenreName = m.d.name
+            });
+            var q5 = q4.Join(db.Genre, p => p.singergenreid, d => d.Id, (p, d) => new { p, d }).Select(m => new
+            {
+                m.p.musicdate,
+                m.p.musicfilelocation,
+                m.p.musicgnre,
+                m.p.musicgpid,
+                m.p.musicid,
+                m.p.musiclanid,
+                m.p.musiclikes,
+                m.p.musicName,
+                m.p.musicnote,
+                m.p.musicpic,
+                m.p.musicViews,
+                m.p.singergenreid,
+                m.p.singergpid,
+                m.p.singerId,
+                m.p.singerlanid,
+                m.p.singername,
+                m.p.musiclanName,
+                m.p.musicgenreName,
+                singergenreName = m.d.name
+            });
+            List<SingerMusicsViewModel> sml = new List<SingerMusicsViewModel>();
+            foreach (var item in q5)
+            {
+                SingerMusicsViewModel sm = new SingerMusicsViewModel();
+                sm.singername = item.singername;
+                sm.singerid = item.singerId;
+                sm.singergpid = item.singergpid;
+                sm.singergenreid = item.singergenreid;
+                sm.musicviews = item.musicViews;
+                sm.musicpic = item.musicpic;
+                sm.musicnote = item.musicnote;
+                sm.musicname = item.musicName;
+                sm.musiclikes = item.musiclikes;
+                sm.musiclanName = item.musiclanName;
+                sm.musiclanid = item.musiclanid;
+                sm.musicid = item.musicid;
+                sm.musicgpid = item.musicgpid;
+                sm.musicgenreid = item.musicgnre;
+                sm.musicfilelocation = item.musicfilelocation;
+                sm.musicdate = item.musicdate;
+                sm.musicgenreName = item.musicgenreName;
+                sm.singergenreName = item.singergenreName;
+                sml.Add(sm);
+            }
+            ViewBag.SingerName = q.First().name;
+            ViewBag.Singerid = q.First().Id;
+            var gid = q.First().genreId;
+            var gnre = db.Genre.Where(w => w.Id == gid).ToList().Single();
+            ViewBag.SingerGenreName = gnre.name;
+            return View(sml);
+        }
+        public ActionResult SingersPage()
+        {
+            var q = db.Singer.ToList();
+            q = q.Take(8).ToList();
+            var q1 = q.Join(db.Language, p => p.languageId, d => d.Id, (p, d) => new { p, d }).Select(m => new
+            {
+                m.p.genreId,
+                m.p.groupId,
+                m.p.Id,
+                m.p.languageId,
+                m.p.name,
+                lanName = m.d.name
+            });
+            var q2 = q1.Join(db.Genre, p => p.genreId, d => d.Id, (p, d) => new { p, d }).Select(m => new
+            {
+                m.p.genreId,
+                m.p.groupId,
+                m.p.Id,
+                m.p.languageId,
+                m.p.name,
+                m.p.lanName,
+                genreName = m.d.name
+            });
+            List<SingerViewModel> sl = new List<SingerViewModel>();
+            foreach (var item in q2)
+            {
+                SingerViewModel s = new SingerViewModel();
+                s.Id = item.Id;
+                s.name = item.name;
+                s.gnreid = item.genreId;
+                s.gpid = item.groupId;
+                s.languageid = item.languageId;
+                s.languageName = item.lanName;
+                s.genreName = item.genreName;
+                sl.Add(s);
+            }
+
+            var c = db.Singer.Count();
+            int take = 8;
+            ViewBag.PageCount = (c / take) + 1;
+            ViewBag.SingerCount = c;
+            return View(sl);
+        }
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public JsonResult SingersPage(int id = 0)
+        {
+            var singers = db.Singer.ToList();
+            if (id == 1)
+            {
+                singers = singers.Take(8).ToList();
+            }
+            if (id > 1)
+            {
+                for (int i = 1; i < id; i++)
+                {
+                    singers = singers.Skip(8).ToList();
+                }
+                singers = singers.Take(8).ToList();
+            }
+            var q1 = singers.Join(db.Language, p => p.languageId, d => d.Id, (p, d) => new { p, d }).Select(m => new
+            {
+                m.p.genreId,
+                m.p.groupId,
+                m.p.Id,
+                m.p.languageId,
+                m.p.name,
+                lanName = m.d.name
+            });
+            var q2 = q1.Join(db.Genre, p => p.genreId, d => d.Id, (p, d) => new { p, d }).Select(m => new
+            {
+                m.p.genreId,
+                m.p.groupId,
+                m.p.Id,
+                m.p.languageId,
+                m.p.name,
+                m.p.lanName,
+                genreName = m.d.name
+            });
+
+            List<SingerViewModel> sl = new List<SingerViewModel>();
+            foreach (var item in q2)
+            {
+                SingerViewModel s = new SingerViewModel();
+                s.Id = item.Id;
+                s.name = item.name;
+                s.gnreid = item.genreId;
+                s.gpid = item.groupId;
+                s.languageid = item.languageId;
+                s.languageName = item.lanName;
+                s.genreName = item.genreName;
+                sl.Add(s);
+            }
+
+            return Json(sl);
+        }
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -364,9 +573,55 @@ namespace Music.Controllers
 
             return View();
         }
-        public ActionResult Search(string search)
+
+        public ActionResult Search(string id)
         {
-            return View();
+            List<MusicViewModel> ml = new List<MusicViewModel>();
+            var sr = db.Song.Where(w => w.name.ToLower().Contains(id.ToLower()) == true || id.ToLower().Contains(w.name.ToLower()) == true).ToList().Distinct();
+            foreach (var item in sr)
+            {
+                MusicViewModel m = new MusicViewModel();
+                m.Id = item.Id;
+                m.pic = item.pic;
+                m.name = item.name;
+                m.singerName = item.singerName;
+                m.viewCount = item.viewCount;
+                ml.Add(m);
+            }
+            ViewBag.c = ml.Count();
+            return View(ml);
         }
+        //[ValidateAntiForgeryToken]
+        //[HttpPost]
+        //public JsonResult Search(string search)
+        //{
+        //    List<MusicViewModel> ml = new List<MusicViewModel>();
+        //    foreach (var item in db.Song.ToList())
+        //    {
+        //        if (item.name.ToLower().Contains(search.ToLower()) == true || search.ToLower().Contains(item.name.ToLower()) == true)
+        //        {
+        //            MusicViewModel m = new MusicViewModel();
+        //            m.Id = item.Id;
+        //            m.pic = item.pic;
+        //            m.name = item.name;
+        //            m.singerName = item.singerName;
+        //            m.viewCount = item.viewCount;
+        //            ml.Add(m);
+        //        }
+        //    }
+        //    //var sr = db.Song.Where(w => w.name.ToLower().Contains(search.ToLower()) == true || search.ToLower().Contains(w.name.ToLower()) == true).ToList().Distinct();
+        //    //foreach (var item in sr)
+        //    //{
+        //    //    MusicViewModel m = new MusicViewModel();
+        //    //    m.Id = item.Id;
+        //    //    m.pic = item.pic;
+        //    //    m.name = item.name;
+        //    //    m.singerName = item.singerName;
+        //    //    m.viewCount = item.viewCount;
+        //    //    ml.Add(m);
+        //    //}
+        //    ViewBag.c = ml.Count();
+        //    return Json(ml);
+        //}
     }
 }

@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<GenreViewModel>
-    <div id="genres" class="row" style="border-style: solid; border-color: white;">
+    <div id="genres" class="row">
         <div class="row"  style="font-size: 20px;margin-right:4px;color:lightgray">
             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
-                <a style="color:white" href="/Home/SongGenres">Genres</a>
+                <a style="color:lightgray" href="/Home/SongGenres">Genres</a>
                 <hr />
             </div>
             <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
@@ -18,11 +18,16 @@
                     {
                         k++;
                         <p id="k" class="hide">@k</p>
-                        <div id="genre@(k)" class="thumbnail col-lg-3 col-md-3 col-sm-5 col-xs-5" style="margin-right: 10px;border: 1px; width: 190px; height: 210px; background-color:antiquewhite; opacity: 0.8">
+                        <div id="genre@(k)" class="thumbnail col-lg-3 col-md-3 col-sm-5 col-xs-5" style="        margin-right: 10px;
+        border: 1px;
+        width: 190px;
+        height: 210px;
+        background-color: rosybrown;
+        opacity: 0.8">
                             <img src="@item.pic" style="height:100px;width:140px" />
                             <br />
                             <b>Genre:@item.Name</b><br />
-                            <a href="/Home/ListPageGenre/@item.Id"><p>View list of songs</p></a>
+                            <a href="/Home/ListPageGenre/@item.Id"><p  style="color:darkslategray">View list of songs</p></a>
                         </div>
                     }
                 </div>

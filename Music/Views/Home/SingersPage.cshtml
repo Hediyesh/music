@@ -1,0 +1,37 @@
+﻿@model IEnumerable<SingerViewModel>
+@{
+    ViewBag.Title = "SingersPage";
+}
+<div class="row">
+    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+        <h3 style="margin-right:5px;color:lightcoral;opacity:0.8">List Of Singers</h3>
+        <hr />
+        <div class="row" id="pgs">
+            @foreach (var item in Model)
+            {
+                <div class="pages thumbnail col-lg-3 col-md-3 col-sm-5 col-xs-5" style="margin-right:10px;border: 1px; width: 190px; height: 210px; background-color: rosybrown; opacity: 0.8">
+                    <img src="/pics/microfono.jpg" style="height:100px;width:140px" />
+                    <br />
+                    <b>Singer:@item.name</b><br />
+                    <b>Genre:@item.genreName</b><br />
+                    <a href="/Home/SingerSongsPage/@item.Id"><p style="color:darkslategray">View List Of Songs</p></a>
+                </div>
+
+            }
+        </div>
+        <input type="hidden" value="@ViewBag.SingerCount" id="SingerCount" />
+    </div>
+    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+</div>
+
+<div class="row text-center">
+    @if (ViewBag.PageCount > 0)
+    {
+        for (int i = 1; i <= ViewBag.PageCount; i++)
+        {
+            <button class="btn btn-default btn-sm center PagingButtons" style="color:white;background-color:gray" onclick="PaginationSong(@i)">@i</button>
+        }
+    }
+</div>
+

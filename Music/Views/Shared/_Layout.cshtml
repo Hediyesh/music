@@ -12,6 +12,7 @@
     <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css' rel='stylesheet' />
 </head>
 <body>
+    @Html.AntiForgeryToken()
     <div class="row">
         <nav id="nav" class="navbar navbar-fixed-top navbar-collapse" style="background-color: lightgray;width:100%;margin-left:0px">
             <div class="row">
@@ -23,7 +24,7 @@
                 <div class="col-xs-2"></div>
                 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-11 ">
                     <form style="margin-top:7px;margin-bottom:5px">
-                        <input class="form-control" type="text" id="searchtext" placeholder="search" style="width: 90%;display: inline-block" value="" /><a href='' onclick="this.href = '/Home/Search/' + document.getElementById('searchtext').value" class="btn btn-sm" style="width:10%;display:inline-block;height:32px;color:black;background-color:darkgrey"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>                        
+                        <input class="form-control" type="text" id="searchtext" placeholder="search" style="width: 90%;display: inline-block" value="" /><a href='' onclick="this.href = '/Home/Search/' + document.getElementById('searchtext').value" class="btn btn-sm" style="width:10%;display:inline-block;height:32px;color:black;background-color:darkgrey"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a>
                     </form>
                 </div>
                 <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>

@@ -2,7 +2,6 @@
 @{
     ViewBag.Title = "ListPage";
 }
-@Html.AntiForgeryToken()
 <div class="row">
     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
@@ -12,12 +11,12 @@
         <div class="row" id="pg">
             @foreach (var item in Model)
             {
-                <div class="thumbnail col-lg-3 col-md-3 col-sm-5 col-xs-5" style="margin-right: 5px;border: 10px; width: 186px; height: 210px; background-color:lightgray;">
+                <div class="thumbnail col-lg-3 col-md-3 col-sm-5 col-xs-5" style="margin-right: 5px;border: 10px; width: 186px; height: 210px; background-color:rosybrown;">
                     <img src="@item.pic" style="height:100px;width:120px" />
                     <br />
                     <b>Song: @item.name</b><br />
                     <b>Singer: @item.singerName</b><br />
-                    <p><a href="/Home/SongPage/@item.Id">More...</a></p>
+                    <a href="/Home/SongPage/@item.Id"><p  style="color:darkslategray">More info...</p></a>
                 </div>
             }
         </div>
@@ -29,10 +28,6 @@
                     <button class="btn btn-default btn-sm center PagingButtons" style="color:white;background-color:gray" onclick="Pagination(@i)">@i</button>
                 }
             }
-        </div>
-        <br />
-        <div class="row thumbnail" style="border:1px;border-style:solid;border-color:darkgrey;background-color:darkgray;opacity:0.6">
-            <p style="color:aliceblue">@ViewBag.Tags</p>
         </div>
     </div>
     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>

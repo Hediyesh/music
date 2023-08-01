@@ -1,0 +1,40 @@
+﻿@model IEnumerable<SingerMusicsViewModel>
+@{
+    ViewBag.Title = "SingerSongsPage";
+}
+@{
+    SingerMusicsViewModel s = Model.ToList().FirstOrDefault();
+}
+<div class="row">
+    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+        <div class="row" style="color:rosybrown;">
+            <h4>Singer: @ViewBag.SingerName</h4>
+            <p>Genre: @ViewBag.SingerGenreName</p>
+            <p class="hidden" id="sid"> @ViewBag.Singerid</p>
+            <p>Nmber Of Songs: @Model.ToList().Count</p>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <p class="samerow">Add To Your Favorite List Of Singers  <span id="heart" onclick="ToggleHeart(@User.Identity.Name,@ViewBag.Singerid); " title="like" class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span></p>
+            }
+        </div>
+        <input type="hidden" id="identityname" value="@User.Identity.Name" />
+        @foreach (var item in Model)
+        {
+            <div class="row thumbnail" style="border:1px;border-color:rosybrown;border-style:solid;background-color:rosybrown;">
+                <div class="col-lg-10 col-md-10 col-sm-8 col-xs-8 pull-right">
+                    <p>Song Name: @item.musicname</p>
+                    <p>Genre: @item.musicgenreName</p>
+                    <a href="/Home/SongPage/@item.musicid" style="color:seagreen">More info...</a>
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-4 pull-left">
+                    <img class="img-thumbnail" src="@item.musicpic" style="height: 120px; width: 120px" />
+                </div>
+            </div>
+            <br />
+        }
+    </div>
+    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+</div>
+
+<script src="~/Scripts/SingerSong.js"></script>

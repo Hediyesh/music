@@ -212,7 +212,6 @@ function SabtNazar(id, type) {
                             '</div>' +
                             '<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>' +
                             '</div>';
-                        //$("#commentha").prepend(str).html();
                         $("#body").load("#commentha");
                     }
                     else {

@@ -134,6 +134,7 @@
     <Compile Include="Models\CommentViewModel.cs" />
     <Compile Include="Models\GenreViewModel.cs" />
     <Compile Include="Models\MusicViewModel.cs" />
+    <Compile Include="Models\SingerMusicsViewModel.cs" />
     <Compile Include="Models\SingerViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -184,6 +185,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\SingerSong.js" />
     <Content Include="Scripts\Site.js" />
     <Content Include="Scripts\Song.js" />
     <Content Include="Songs\01 - Love Talk %28English Version%29.mp3" />
@@ -212,6 +214,8 @@
     <Content Include="Views\Home\SongPage.cshtml" />
     <Content Include="Views\Home\ListPage.cshtml" />
     <Content Include="Views\Home\SongGenres.cshtml" />
+    <Content Include="Views\Home\SingerSongsPage.cshtml" />
+    <Content Include="Views\Home\SingersPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -231,7 +235,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataLayer\DataLayer.csproj">
-      <Project>{2ac0cfb1-ef8c-4274-b700-ef90cc8c7b7d}</Project>
+      <Project>{aaa7378c-8d55-448e-9336-eaf2206d7b83}</Project>
       <Name>DataLayer</Name>
     </ProjectReference>
   </ItemGroup>

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="MyMusicDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="MyMusicDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Comments">
           <Key>
             <PropertyRef Name="Id" />
@@ -40,16 +40,6 @@
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="RegisterDate" Type="datetime" Nullable="false" />
           <Property Name="bio" Type="nvarchar" MaxLength="500" />
-        </EntityType>
-        <EntityType Name="KeyWords">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="songid" Type="int" />
-          <Property Name="singerid" Type="int" />
-          <Property Name="genreid" Type="int" />
         </EntityType>
         <EntityType Name="Language">
           <Key>
@@ -322,7 +312,6 @@
           <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Genre" EntityType="Self.Genre" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Karbar" EntityType="Self.Karbar" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="KeyWords" EntityType="Self.KeyWords" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LikedSingers" EntityType="Self.LikedSingers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LikedSongs" EntityType="Self.LikedSongs" Schema="dbo" store:Type="Tables" />
@@ -396,7 +385,8 @@
             <End Role="Song" EntitySet="Song" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MyMusicDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -411,7 +401,7 @@
           <Property Name="createDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="songid" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Karbar" Relationship="Self.FK_comment" FromRole="Comments" ToRole="Karbar" />
-          <NavigationProperty Name="Song" Relationship="MyMusicDBModel.FK_commentsongid" FromRole="Comments" ToRole="Song" />
+          <NavigationProperty Name="Song" Relationship="Self.FK_commentsongid" FromRole="Comments" ToRole="Song" />
         </EntityType>
         <EntityType Name="Genre">
           <Key>
@@ -421,7 +411,7 @@
           <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="pic" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Singer" Relationship="Self.FK_singer2" FromRole="Genre" ToRole="Singer" />
-          <NavigationProperty Name="Song" Relationship="MyMusicDBModel.musicgnre_FK" FromRole="Genre" ToRole="Song" />
+          <NavigationProperty Name="Song" Relationship="Self.musicgnre_FK" FromRole="Genre" ToRole="Song" />
         </EntityType>
         <EntityType Name="Karbar">
           <Key>
@@ -445,16 +435,6 @@
           <NavigationProperty Name="LikedSongText" Relationship="Self.FK_liketext" FromRole="Karbar" ToRole="LikedSongText" />
           <NavigationProperty Name="Roles" Relationship="Self.KarbarRole_Fk" FromRole="Karbar" ToRole="Roles" />
         </EntityType>
-        <EntityType Name="KeyWords">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="songid" Type="Int32" />
-          <Property Name="singerid" Type="Int32" />
-          <Property Name="genreid" Type="Int32" />
-        </EntityType>
         <EntityType Name="Language">
           <Key>
             <PropertyRef Name="Id" />
@@ -462,7 +442,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Singer" Relationship="Self.FK_singer1" FromRole="Language" ToRole="Singer" />
-          <NavigationProperty Name="Song" Relationship="MyMusicDBModel.musiclan_FK" FromRole="Language" ToRole="Song" />
+          <NavigationProperty Name="Song" Relationship="Self.musiclan_FK" FromRole="Language" ToRole="Song" />
         </EntityType>
         <EntityType Name="LikedSingers">
           <Key>
@@ -482,7 +462,7 @@
           <Property Name="userId" Type="Int32" Nullable="false" />
           <Property Name="SongId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Karbar" Relationship="Self.FK_likesong" FromRole="LikedSongs" ToRole="Karbar" />
-          <NavigationProperty Name="Song" Relationship="MyMusicDBModel.FK_likesongid" FromRole="LikedSongs" ToRole="Song" />
+          <NavigationProperty Name="Song" Relationship="Self.FK_likesongid" FromRole="LikedSongs" ToRole="Song" />
         </EntityType>
         <EntityType Name="LikedSongText">
           <Key>
@@ -492,7 +472,7 @@
           <Property Name="userId" Type="Int32" Nullable="false" />
           <Property Name="SongId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Karbar" Relationship="Self.FK_liketext" FromRole="LikedSongText" ToRole="Karbar" />
-          <NavigationProperty Name="Song" Relationship="MyMusicDBModel.FK_liketextid" FromRole="LikedSongText" ToRole="Song" />
+          <NavigationProperty Name="Song" Relationship="Self.FK_liketextid" FromRole="LikedSongText" ToRole="Song" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -515,7 +495,33 @@
           <NavigationProperty Name="Language" Relationship="Self.FK_singer1" FromRole="Singer" ToRole="Language" />
           <NavigationProperty Name="LikedSingers" Relationship="Self.FK_likesingerid" FromRole="Singer" ToRole="LikedSingers" />
           <NavigationProperty Name="SongGroup" Relationship="Self.FK_singer3" FromRole="Singer" ToRole="SongGroup" />
-          <NavigationProperty Name="Song" Relationship="MyMusicDBModel.musicsinger_FK" FromRole="Singer" ToRole="Song" />
+          <NavigationProperty Name="Song" Relationship="Self.musicsinger_FK" FromRole="Singer" ToRole="Song" />
+        </EntityType>
+        <EntityType Name="Song">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="singerId" Type="Int32" Nullable="false" />
+          <Property Name="languageId" Type="Int32" Nullable="false" />
+          <Property Name="genreId" Type="Int32" Nullable="false" />
+          <Property Name="releaseDate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="filelocation" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="groupId" Type="Int32" Nullable="false" />
+          <Property Name="pic" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="youtubeAddress" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+          <Property Name="singerName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="likes" Type="Int32" Nullable="false" />
+          <Property Name="viewCount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK_commentsongid" FromRole="Song" ToRole="Comments" />
+          <NavigationProperty Name="Genre" Relationship="Self.musicgnre_FK" FromRole="Song" ToRole="Genre" />
+          <NavigationProperty Name="Language" Relationship="Self.musiclan_FK" FromRole="Song" ToRole="Language" />
+          <NavigationProperty Name="LikedSongs" Relationship="Self.FK_likesongid" FromRole="Song" ToRole="LikedSongs" />
+          <NavigationProperty Name="LikedSongText" Relationship="Self.FK_liketextid" FromRole="Song" ToRole="LikedSongText" />
+          <NavigationProperty Name="Singer" Relationship="Self.musicsinger_FK" FromRole="Song" ToRole="Singer" />
+          <NavigationProperty Name="SongGroup" Relationship="Self.musicgp_FK" FromRole="Song" ToRole="SongGroup" />
         </EntityType>
         <EntityType Name="SongGroup">
           <Key>
@@ -525,7 +531,7 @@
           <Property Name="parentId" Type="Int32" Nullable="false" />
           <Property Name="name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Singer" Relationship="Self.FK_singer3" FromRole="SongGroup" ToRole="Singer" />
-          <NavigationProperty Name="Song" Relationship="MyMusicDBModel.musicgp_FK" FromRole="SongGroup" ToRole="Song" />
+          <NavigationProperty Name="Song" Relationship="Self.musicgp_FK" FromRole="SongGroup" ToRole="Song" />
         </EntityType>
         <Association Name="FK_comment">
           <End Role="Karbar" Type="Self.Karbar" Multiplicity="1" />
@@ -539,6 +545,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_commentsongid">
+          <End Role="Song" Type="Self.Song" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Song">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="songid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_singer2">
           <End Role="Genre" Type="Self.Genre" Multiplicity="1" />
           <End Role="Singer" Type="Self.Singer" Multiplicity="*" />
@@ -547,6 +565,18 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Singer">
+              <PropertyRef Name="genreId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="musicgnre_FK">
+          <End Role="Genre" Type="Self.Genre" Multiplicity="1" />
+          <End Role="Song" Type="Self.Song" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Song">
               <PropertyRef Name="genreId" />
             </Dependent>
           </ReferentialConstraint>
@@ -611,6 +641,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="musiclan_FK">
+          <End Role="Language" Type="Self.Language" Multiplicity="1" />
+          <End Role="Song" Type="Self.Song" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Song">
+              <PropertyRef Name="languageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_likesingerid">
           <End Role="Singer" Type="Self.Singer" Multiplicity="1" />
           <End Role="LikedSingers" Type="Self.LikedSingers" Multiplicity="*" />
@@ -620,6 +662,30 @@
             </Principal>
             <Dependent Role="LikedSingers">
               <PropertyRef Name="SingerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_likesongid">
+          <End Role="Song" Type="Self.Song" Multiplicity="1" />
+          <End Role="LikedSongs" Type="Self.LikedSongs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Song">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LikedSongs">
+              <PropertyRef Name="SongId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_liketextid">
+          <End Role="Song" Type="Self.Song" Multiplicity="1" />
+          <End Role="LikedSongText" Type="Self.LikedSongText" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Song">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LikedSongText">
+              <PropertyRef Name="SongId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -635,25 +701,57 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="musicsinger_FK">
+          <End Role="Singer" Type="Self.Singer" Multiplicity="1" />
+          <End Role="Song" Type="Self.Song" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Singer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Song">
+              <PropertyRef Name="singerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="musicgp_FK">
+          <End Role="SongGroup" Type="Self.SongGroup" Multiplicity="1" />
+          <End Role="Song" Type="Self.Song" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SongGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Song">
+              <PropertyRef Name="groupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="MyMusicDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Comments" EntityType="Self.Comments" />
           <EntitySet Name="Genre" EntityType="Self.Genre" />
           <EntitySet Name="Karbar" EntityType="Self.Karbar" />
-          <EntitySet Name="KeyWords" EntityType="Self.KeyWords" />
           <EntitySet Name="Language" EntityType="Self.Language" />
           <EntitySet Name="LikedSingers" EntityType="Self.LikedSingers" />
           <EntitySet Name="LikedSongs" EntityType="Self.LikedSongs" />
           <EntitySet Name="LikedSongText" EntityType="Self.LikedSongText" />
           <EntitySet Name="Roles" EntityType="Self.Roles" />
           <EntitySet Name="Singer" EntityType="Self.Singer" />
+          <EntitySet Name="Song" EntityType="Self.Song" />
           <EntitySet Name="SongGroup" EntityType="Self.SongGroup" />
           <AssociationSet Name="FK_comment" Association="Self.FK_comment">
             <End Role="Karbar" EntitySet="Karbar" />
             <End Role="Comments" EntitySet="Comments" />
           </AssociationSet>
+          <AssociationSet Name="FK_commentsongid" Association="Self.FK_commentsongid">
+            <End Role="Song" EntitySet="Song" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
           <AssociationSet Name="FK_singer2" Association="Self.FK_singer2">
             <End Role="Genre" EntitySet="Genre" />
             <End Role="Singer" EntitySet="Singer" />
+          </AssociationSet>
+          <AssociationSet Name="musicgnre_FK" Association="Self.musicgnre_FK">
+            <End Role="Genre" EntitySet="Genre" />
+            <End Role="Song" EntitySet="Song" />
           </AssociationSet>
           <AssociationSet Name="FK_likesinger" Association="Self.FK_likesinger">
             <End Role="Karbar" EntitySet="Karbar" />
@@ -675,154 +773,35 @@
             <End Role="Language" EntitySet="Language" />
             <End Role="Singer" EntitySet="Singer" />
           </AssociationSet>
+          <AssociationSet Name="musiclan_FK" Association="Self.musiclan_FK">
+            <End Role="Language" EntitySet="Language" />
+            <End Role="Song" EntitySet="Song" />
+          </AssociationSet>
           <AssociationSet Name="FK_likesingerid" Association="Self.FK_likesingerid">
             <End Role="Singer" EntitySet="Singer" />
             <End Role="LikedSingers" EntitySet="LikedSingers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_likesongid" Association="Self.FK_likesongid">
+            <End Role="Song" EntitySet="Song" />
+            <End Role="LikedSongs" EntitySet="LikedSongs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_liketextid" Association="Self.FK_liketextid">
+            <End Role="Song" EntitySet="Song" />
+            <End Role="LikedSongText" EntitySet="LikedSongText" />
           </AssociationSet>
           <AssociationSet Name="FK_singer3" Association="Self.FK_singer3">
             <End Role="SongGroup" EntitySet="SongGroup" />
             <End Role="Singer" EntitySet="Singer" />
           </AssociationSet>
-          <EntitySet Name="Song" EntityType="MyMusicDBModel.Song" />
-          <AssociationSet Name="FK_commentsongid" Association="MyMusicDBModel.FK_commentsongid">
-            <End Role="Song" EntitySet="Song" />
-            <End Role="Comments" EntitySet="Comments" />
-          </AssociationSet>
-          <AssociationSet Name="musicgnre_FK" Association="MyMusicDBModel.musicgnre_FK">
-            <End Role="Genre" EntitySet="Genre" />
-            <End Role="Song" EntitySet="Song" />
-          </AssociationSet>
-          <AssociationSet Name="musiclan_FK" Association="MyMusicDBModel.musiclan_FK">
-            <End Role="Language" EntitySet="Language" />
-            <End Role="Song" EntitySet="Song" />
-          </AssociationSet>
-          <AssociationSet Name="FK_likesongid" Association="MyMusicDBModel.FK_likesongid">
-            <End Role="Song" EntitySet="Song" />
-            <End Role="LikedSongs" EntitySet="LikedSongs" />
-          </AssociationSet>
-          <AssociationSet Name="FK_liketextid" Association="MyMusicDBModel.FK_liketextid">
-            <End Role="Song" EntitySet="Song" />
-            <End Role="LikedSongText" EntitySet="LikedSongText" />
-          </AssociationSet>
-          <AssociationSet Name="musicsinger_FK" Association="MyMusicDBModel.musicsinger_FK">
+          <AssociationSet Name="musicsinger_FK" Association="Self.musicsinger_FK">
             <End Role="Singer" EntitySet="Singer" />
             <End Role="Song" EntitySet="Song" />
           </AssociationSet>
-          <AssociationSet Name="musicgp_FK" Association="MyMusicDBModel.musicgp_FK">
+          <AssociationSet Name="musicgp_FK" Association="Self.musicgp_FK">
             <End Role="SongGroup" EntitySet="SongGroup" />
             <End Role="Song" EntitySet="Song" />
           </AssociationSet>
-          </EntityContainer>
-        <EntityType Name="Song">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="singerId" Type="Int32" Nullable="false" />
-          <Property Name="languageId" Type="Int32" Nullable="false" />
-          <Property Name="genreId" Type="Int32" Nullable="false" />
-          <Property Name="releaseDate" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="filelocation" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
-          <Property Name="groupId" Type="Int32" Nullable="false" />
-          <Property Name="pic" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
-          <Property Name="Note" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
-          <Property Name="youtubeAddress" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
-          <Property Name="singerName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="likes" Type="Int32" Nullable="false" />
-          <Property Name="viewCount" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Comments" Relationship="MyMusicDBModel.FK_commentsongid" FromRole="Song" ToRole="Comments" />
-          <NavigationProperty Name="Genre" Relationship="MyMusicDBModel.musicgnre_FK" FromRole="Song" ToRole="Genre" />
-          <NavigationProperty Name="Language" Relationship="MyMusicDBModel.musiclan_FK" FromRole="Song" ToRole="Language" />
-          <NavigationProperty Name="LikedSongs" Relationship="MyMusicDBModel.FK_likesongid" FromRole="Song" ToRole="LikedSongs" />
-          <NavigationProperty Name="LikedSongText" Relationship="MyMusicDBModel.FK_liketextid" FromRole="Song" ToRole="LikedSongText" />
-          <NavigationProperty Name="Singer" Relationship="MyMusicDBModel.musicsinger_FK" FromRole="Song" ToRole="Singer" />
-          <NavigationProperty Name="SongGroup" Relationship="MyMusicDBModel.musicgp_FK" FromRole="Song" ToRole="SongGroup" />
-        </EntityType>
-        <Association Name="FK_commentsongid">
-          <End Type="MyMusicDBModel.Song" Role="Song" Multiplicity="1" />
-          <End Type="MyMusicDBModel.Comments" Role="Comments" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Song">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Comments">
-              <PropertyRef Name="songid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="musicgnre_FK">
-          <End Type="MyMusicDBModel.Genre" Role="Genre" Multiplicity="1" />
-          <End Type="MyMusicDBModel.Song" Role="Song" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Genre">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Song">
-              <PropertyRef Name="genreId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="musiclan_FK">
-          <End Type="MyMusicDBModel.Language" Role="Language" Multiplicity="1" />
-          <End Type="MyMusicDBModel.Song" Role="Song" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Language">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Song">
-              <PropertyRef Name="languageId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_likesongid">
-          <End Type="MyMusicDBModel.Song" Role="Song" Multiplicity="1" />
-          <End Type="MyMusicDBModel.LikedSongs" Role="LikedSongs" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Song">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="LikedSongs">
-              <PropertyRef Name="SongId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_liketextid">
-          <End Type="MyMusicDBModel.Song" Role="Song" Multiplicity="1" />
-          <End Type="MyMusicDBModel.LikedSongText" Role="LikedSongText" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Song">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="LikedSongText">
-              <PropertyRef Name="SongId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="musicsinger_FK">
-          <End Type="MyMusicDBModel.Singer" Role="Singer" Multiplicity="1" />
-          <End Type="MyMusicDBModel.Song" Role="Song" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Singer">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Song">
-              <PropertyRef Name="singerId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="musicgp_FK">
-          <End Type="MyMusicDBModel.SongGroup" Role="SongGroup" Multiplicity="1" />
-          <End Type="MyMusicDBModel.Song" Role="Song" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SongGroup">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Song">
-              <PropertyRef Name="groupId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -865,17 +844,6 @@
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="RegisterDate" ColumnName="RegisterDate" />
                 <ScalarProperty Name="bio" ColumnName="bio" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="KeyWords">
-            <EntityTypeMapping TypeName="MyMusicDBModel.KeyWords">
-              <MappingFragment StoreEntitySet="KeyWords">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="songid" ColumnName="songid" />
-                <ScalarProperty Name="singerid" ColumnName="singerid" />
-                <ScalarProperty Name="genreid" ColumnName="genreid" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -933,32 +901,32 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Song">
+            <EntityTypeMapping TypeName="MyMusicDBModel.Song">
+              <MappingFragment StoreEntitySet="Song">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="singerId" ColumnName="singerId" />
+                <ScalarProperty Name="languageId" ColumnName="languageId" />
+                <ScalarProperty Name="genreId" ColumnName="genreId" />
+                <ScalarProperty Name="releaseDate" ColumnName="releaseDate" />
+                <ScalarProperty Name="filelocation" ColumnName="filelocation" />
+                <ScalarProperty Name="groupId" ColumnName="groupId" />
+                <ScalarProperty Name="pic" ColumnName="pic" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="youtubeAddress" ColumnName="youtubeAddress" />
+                <ScalarProperty Name="singerName" ColumnName="singerName" />
+                <ScalarProperty Name="likes" ColumnName="likes" />
+                <ScalarProperty Name="viewCount" ColumnName="viewCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="SongGroup">
             <EntityTypeMapping TypeName="MyMusicDBModel.SongGroup">
               <MappingFragment StoreEntitySet="SongGroup">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="parentId" ColumnName="parentId" />
                 <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Song">
-            <EntityTypeMapping TypeName="MyMusicDBModel.Song">
-              <MappingFragment StoreEntitySet="Song">
-                <ScalarProperty Name="viewCount" ColumnName="viewCount" />
-                <ScalarProperty Name="likes" ColumnName="likes" />
-                <ScalarProperty Name="singerName" ColumnName="singerName" />
-                <ScalarProperty Name="youtubeAddress" ColumnName="youtubeAddress" />
-                <ScalarProperty Name="Note" ColumnName="Note" />
-                <ScalarProperty Name="pic" ColumnName="pic" />
-                <ScalarProperty Name="groupId" ColumnName="groupId" />
-                <ScalarProperty Name="filelocation" ColumnName="filelocation" />
-                <ScalarProperty Name="releaseDate" ColumnName="releaseDate" />
-                <ScalarProperty Name="genreId" ColumnName="genreId" />
-                <ScalarProperty Name="languageId" ColumnName="languageId" />
-                <ScalarProperty Name="singerId" ColumnName="singerId" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

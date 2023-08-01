@@ -28,14 +28,13 @@ namespace DataLayer
         public virtual DbSet<Comments> Comments { get; set; }
         public virtual DbSet<Genre> Genre { get; set; }
         public virtual DbSet<Karbar> Karbar { get; set; }
-        public virtual DbSet<KeyWords> KeyWords { get; set; }
         public virtual DbSet<Language> Language { get; set; }
         public virtual DbSet<LikedSingers> LikedSingers { get; set; }
         public virtual DbSet<LikedSongs> LikedSongs { get; set; }
         public virtual DbSet<LikedSongText> LikedSongText { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<Singer> Singer { get; set; }
-        public virtual DbSet<SongGroup> SongGroup { get; set; }
         public virtual DbSet<Song> Song { get; set; }
+        public virtual DbSet<SongGroup> SongGroup { get; set; }
     }
 }
