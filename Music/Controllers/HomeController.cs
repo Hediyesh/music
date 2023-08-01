@@ -276,6 +276,81 @@ namespace Music.Controllers
 
             return Json(ml);
         }
+        public ActionResult ListPageGenre(int id = 0)
+        {
+            ViewBag.Id = id;
+            var q = db.Song.Where(w => w.genreId == id).ToList();
+            List<MusicViewModel> ml = new List<MusicViewModel>();
+            foreach (var item in q)
+            {
+                MusicViewModel m = new MusicViewModel();
+                m.Id = item.Id;
+                m.pic = item.pic;
+                m.name = item.name;
+                m.singerName = item.singerName;
+                m.viewCount = item.viewCount;
+                ml.Add(m);
+            }
+            ViewBag.Tags = string.Join(",", db.KeyWords.Where(w => w.genreid == id).Select(s => s.name).ToList());
+            var c = q.Count();
+            int take = 8;
+            ViewBag.PageCount = (c / take) + 1;
+            return View("ListPage", ml);
+        }
+        public ActionResult ListPageDate(int id = 0)
+        {
+            ViewBag.Id = id;
+            var q = db.Song.OrderByDescending(o => o.releaseDate).ToList();
+            List<MusicViewModel> ml = new List<MusicViewModel>();
+            foreach (var item in q)
+            {
+                MusicViewModel m = new MusicViewModel();
+                m.Id = item.Id;
+                m.pic = item.pic;
+                m.name = item.name;
+                m.singerName = item.singerName;
+                m.viewCount = item.viewCount;
+                ml.Add(m);
+            }
+            var c = q.Count();
+            int take = 8;
+            ViewBag.PageCount = (c / take) + 1;
+            return View("ListPage", ml);
+        }
+        public ActionResult ListPageViewCount(int id = 0)
+        {
+            ViewBag.Id = id;
+            var q = db.Song.OrderByDescending(o => o.viewCount).ToList();
+            List<MusicViewModel> ml = new List<MusicViewModel>();
+            foreach (var item in q)
+            {
+                MusicViewModel m = new MusicViewModel();
+                m.Id = item.Id;
+                m.pic = item.pic;
+                m.name = item.name;
+                m.singerName = item.singerName;
+                m.viewCount = item.viewCount;
+                ml.Add(m);
+            }
+            var c = q.Count();
+            int take = 8;
+            ViewBag.PageCount = (c / take) + 1;
+            return View("ListPage", ml);
+        }
+        public ActionResult SongGenres()
+        {
+            var q = db.Genre.ToList();
+            List<GenreViewModel> gl = new List<GenreViewModel>();
+            foreach (var item in q)
+            {
+                GenreViewModel g = new GenreViewModel();
+                g.Id = item.Id;
+                g.pic = item.pic;
+                g.Name = item.name;
+                gl.Add(g);
+            }
+            return View(gl);
+        }
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

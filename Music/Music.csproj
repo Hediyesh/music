@@ -211,6 +211,7 @@
     <Content Include="Views\Shared\_SingerPartialView.cshtml" />
     <Content Include="Views\Home\SongPage.cshtml" />
     <Content Include="Views\Home\ListPage.cshtml" />
+    <Content Include="Views\Home\SongGenres.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

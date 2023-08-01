@@ -1,0 +1,25 @@
+﻿@model IEnumerable<GenreViewModel>
+@{
+    ViewBag.Title = "SongGenres";
+}
+<div class="row">
+    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+        <h3 style="margin-right:5px;color:lightcoral;opacity:0.7">Song Genres </h3>
+        <hr />
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="thumbnail col-lg-3 col-md-3 col-sm-6 col-xs-6" style="margin-right: 40px;margin-top:5px;border: 1px; width: 190px; height: 210px; background-color: rosybrown; opacity: 0.8">
+                    <img src="@item.pic" style="height:100px;width:140px" />
+                    <br />
+                    <b>سبک:@item.Name</b><br />
+                    <a href="/Home/ListPageGenre/@item.Id"><p style="color:darkslategray">View List Of Songs</p></a>
+                </div>
+
+            }
+        </div>
+    </div>
+    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+</div>
+
