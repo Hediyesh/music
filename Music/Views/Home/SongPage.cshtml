@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "SongPage";
 }
+@Html.AntiForgeryToken()
 <input type="hidden" id="musicid" value="@Model.Id" />
 <div class="row thumbnail" style="border: 1px;border-style: solid;border-color: blanchedalmond;background-color: lightgray;opacity: 1">
     <div class="row">
@@ -168,7 +169,7 @@
         </div>
     </div>
     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
-    
+
 </div>
 <input class="hidden" type="text" id="identityname" value="@User.Identity.Name" />
 <input class="hidden" type="text" id="urlval" value="" />

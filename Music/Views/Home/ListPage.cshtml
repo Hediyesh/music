@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "ListPage";
 }
+@Html.AntiForgeryToken()
 <div class="row">
     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
@@ -16,7 +17,7 @@
                     <br />
                     <b>Song: @item.name</b><br />
                     <b>Singer: @item.singerName</b><br />
-                    <a href="/Home/SongPage/@item.Id"><p  style="color:darkslategray">More info...</p></a>
+                    <a href="/Home/SongPage/@item.Id"><p style="color:darkslategray">More info...</p></a>
                 </div>
             }
         </div>

@@ -84,3 +84,7 @@ C:\Users\Asus\source\repos\Music\Music\bin\Microsoft.CodeDom.Providers.DotNetCom
 C:\Users\Asus\source\repos\Music\Music\obj\Debug\Music.csproj.CopyComplete
 C:\Users\Asus\source\repos\Music\Music\obj\Debug\Music.dll
 C:\Users\Asus\source\repos\Music\Music\obj\Debug\Music.pdb
+C:\Users\Asus\source\repos\Music\Music\bin\Microsoft.Identity.Client.dll
+C:\Users\Asus\source\repos\Music\Music\bin\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\Asus\source\repos\Music\Music\bin\Microsoft.Identity.Client.xml
+C:\Users\Asus\source\repos\Music\Music\bin\Microsoft.IdentityModel.Abstractions.xml

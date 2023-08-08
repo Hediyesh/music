@@ -1,0 +1,132 @@
+﻿@model Music.LoginViewModel
+@{
+    ViewBag.Title = "Login";
+}
+<div class="row" style="color:white;">
+    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+        <h3 style="margin-right:7px">Login</h3>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @if (User.Identity.IsAuthenticated && Request.QueryString["ReturnUrl"] != null)
+        {
+            <div class="alert alert-danger ">
+                <p>You do not have access to this part.</p>
+            </div>
+        }
+        @if (Request.QueryString["ReturnUrl"] != null)
+        {
+            <div class="alert alert-danger ">
+                <p>Please login to access this part.</p>
+            </div>
+        }
+        @if (Request.QueryString["recovery"] != null)
+        {
+            <div class="alert alert-success ">
+                <p>Your password has changed. You can login now.</p>
+            </div>
+        }
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="row">
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                <div class="col-lg-1 col-md-2 col-sm-2 col-xs-2" style="margin-right: 5px">
+                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-md-7 col-lg-6 col-sm-6 col-xs-7">
+                    @Html.EditorFor(model => model.Email, new
+               {
+                   htmlAttributes = new
+                   {
+                       @class = "form-control pull-right",
+                       @style = "border-radius:5px;",
+                       @id = "EmailLogin",
+                       @value = "",
+                       @type = "text",
+                       @rows = "4",
+                       @cols = "30"
+                   }
+               })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-3 col-lg-3 col-sm-3 col-xs-2"></div>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                <div class="col-lg-1 col-md-2 col-sm-2 col-xs-2" style="margin-right:5px">
+                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-md-7 col-lg-6 col-sm-6 col-xs-7">
+                    @Html.EditorFor(model => model.Password, new
+          {
+              htmlAttributes = new
+              {
+                  @class = "form-control pull-right",
+                  @style = "border-radius:5px;",
+                  @id = "PasswordLogin",
+                  @value = "",
+                  @type = "text",
+                  @rows = "4",
+                  @cols = "30"
+              }
+          })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    <a href="/ForgotPassword" class="pull-left" style="font-size:smaller">forgot password</a>
+                </div>
+                <div class="col-md-3 col-lg-3 col-sm-3 col-xs-2"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                <div class="col-lg-2 col-md-3 col-sm-3 col-xs-4">
+                    @Html.LabelFor(model => model.RememberMe, htmlAttributes: new { @class = "control-label" })
+                </div>
+                <div class="col-lg-9 col-md-8 col-sm-8 col-xs-7">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.RememberMe)
+                        @Html.ValidationMessageFor(model => model.RememberMe, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-bottom:7px">
+            <div class="col-md-7 col-lg-7 col-sm-7 col-xs-7">
+                <button type="submit" style="width:100px;" class="btn btn-success btn-sm">Login</button></div>
+            <div class="col-md-2 col-lg-2 col-sm-2 col-xs-2">
+            </div>
+            <div class="col-md-3 col-lg-3 col-sm-3 col-xs-3">
+                <div class="form-group">
+                    <button type="button" onclick="Empty()" data-dismiss="modal" class="btn btn-sm btn-danger" style="width:100px;">Cancel</button>
+                </div>
+            </div>
+        </div>
+        <br />
+        <hr />
+        <br />
+        <div class="row" style="margin-bottom:7px">
+            <div class="col-md-7 col-lg-7 col-sm-7 col-xs-7"><p>  Click to register  <span class="glyphicon glyphicon-hand-right"></span></p></div>
+            <div class="col-md-2 col-lg-2 col-sm-2 col-xs-2">
+            </div>
+            <div class="col-md-3 col-lg-3 col-sm-3 col-xs-3">
+                <div class="form-group">
+                    <button type="button" id="btnSabt" onclick="Register()" class="btn btn-sm btn-primary pull-left" style="width:100px;">Register</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+        }
+    </div>
+    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+</div>
+
+

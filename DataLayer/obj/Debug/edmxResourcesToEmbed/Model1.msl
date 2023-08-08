@@ -22,24 +22,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Karbar">
-      <EntityTypeMapping TypeName="MyMusicDBModel.Karbar">
-        <MappingFragment StoreEntitySet="Karbar">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="firstName" ColumnName="firstName" />
-          <ScalarProperty Name="lastName" ColumnName="lastName" />
-          <ScalarProperty Name="emailAddress" ColumnName="emailAddress" />
-          <ScalarProperty Name="password" ColumnName="password" />
-          <ScalarProperty Name="pic" ColumnName="pic" />
-          <ScalarProperty Name="nameKarbari" ColumnName="nameKarbari" />
-          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-          <ScalarProperty Name="ActiveCode" ColumnName="ActiveCode" />
-          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-          <ScalarProperty Name="RegisterDate" ColumnName="RegisterDate" />
-          <ScalarProperty Name="bio" ColumnName="bio" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Language">
       <EntityTypeMapping TypeName="MyMusicDBModel.Language">
         <MappingFragment StoreEntitySet="Language">
@@ -120,6 +102,24 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="parentId" ColumnName="parentId" />
           <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="User">
+      <EntityTypeMapping TypeName="MyMusicDBModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="bio" ColumnName="bio" />
+          <ScalarProperty Name="RegisterDate" ColumnName="RegisterDate" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ActiveCode" ColumnName="ActiveCode" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="pic" ColumnName="pic" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="emailAddress" ColumnName="emailAddress" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

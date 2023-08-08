@@ -150,3 +150,11 @@ function ToggleHeart(userid, singerid) {
         })
     }
 }
+function Register() {
+    window.document.location = "/Register";
+}
+function Empty() {
+    document.getElementById("EmailLogin").value = "";
+    document.getElementById("PasswordLogin").value = "";
+    document.getElementById("RememberMe").value = "";
+}

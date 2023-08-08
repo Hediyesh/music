@@ -18,7 +18,7 @@ namespace DataLayer
         public int userId { get; set; }
         public int SongId { get; set; }
     
-        public virtual Karbar Karbar { get; set; }
         public virtual Song Song { get; set; }
+        public virtual User User { get; set; }
     }
 }

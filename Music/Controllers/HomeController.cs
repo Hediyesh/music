@@ -115,7 +115,7 @@ namespace Music.Controllers
             List<CommentViewModel> cmlist = new List<CommentViewModel>();
             foreach (var cm in comment1)
             {
-                Karbar user = db.Karbar.Where(s => s.Id == cm.userId).ToList().First();
+                User user = db.User.Where(s => s.Id == cm.userId).ToList().First();
                 CommentViewModel cmModel = new CommentViewModel();
                 cmModel.id = cm.Id;
                 cmModel.createDate = cm.createDate;
@@ -123,7 +123,7 @@ namespace Music.Controllers
                 cmModel.text = cm.text;
                 cmModel.songid = cm.songid;
                 cmModel.userid = cm.userId;
-                cmModel.username = user.nameKarbari;
+                cmModel.username = user.username;
                 cmModel.userpic = user.pic;
                 cmModel.replied = cm.replied;
                 cmlist.Add(cmModel);
@@ -131,7 +131,7 @@ namespace Music.Controllers
             List<CommentViewModel> cmlist2 = new List<CommentViewModel>();
             foreach (var cm in comment2)
             {
-                Karbar user = db.Karbar.Where(s => s.Id == cm.userId).ToList().First();
+                User user = db.User.Where(s => s.Id == cm.userId).ToList().First();
                 CommentViewModel cmModel = new CommentViewModel();
                 cmModel.id = cm.Id;
                 cmModel.createDate = cm.createDate;
@@ -139,7 +139,7 @@ namespace Music.Controllers
                 cmModel.text = cm.text;
                 cmModel.songid = cm.songid;
                 cmModel.userid = cm.userId;
-                cmModel.username = user.nameKarbari;
+                cmModel.username = user.username;
                 cmModel.userpic = user.pic;
                 cmModel.replied = cm.replied;
                 cmlist2.Add(cmModel);
@@ -591,37 +591,5 @@ namespace Music.Controllers
             ViewBag.c = ml.Count();
             return View(ml);
         }
-        //[ValidateAntiForgeryToken]
-        //[HttpPost]
-        //public JsonResult Search(string search)
-        //{
-        //    List<MusicViewModel> ml = new List<MusicViewModel>();
-        //    foreach (var item in db.Song.ToList())
-        //    {
-        //        if (item.name.ToLower().Contains(search.ToLower()) == true || search.ToLower().Contains(item.name.ToLower()) == true)
-        //        {
-        //            MusicViewModel m = new MusicViewModel();
-        //            m.Id = item.Id;
-        //            m.pic = item.pic;
-        //            m.name = item.name;
-        //            m.singerName = item.singerName;
-        //            m.viewCount = item.viewCount;
-        //            ml.Add(m);
-        //        }
-        //    }
-        //    //var sr = db.Song.Where(w => w.name.ToLower().Contains(search.ToLower()) == true || search.ToLower().Contains(w.name.ToLower()) == true).ToList().Distinct();
-        //    //foreach (var item in sr)
-        //    //{
-        //    //    MusicViewModel m = new MusicViewModel();
-        //    //    m.Id = item.Id;
-        //    //    m.pic = item.pic;
-        //    //    m.name = item.name;
-        //    //    m.singerName = item.singerName;
-        //    //    m.viewCount = item.viewCount;
-        //    //    ml.Add(m);
-        //    //}
-        //    ViewBag.c = ml.Count();
-        //    return Json(ml);
-        //}
     }
 }

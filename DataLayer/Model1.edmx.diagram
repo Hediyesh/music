@@ -7,7 +7,6 @@
       <Diagram DiagramId="363ae42c98814a5bb265275a1771d6af" Name="Diagram1">
         <EntityTypeShape EntityType="MyMusicDBModel.Comments" Width="1.5" PointX="10.5" PointY="5.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MyMusicDBModel.Genre" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyMusicDBModel.Karbar" Width="1.5" PointX="3" PointY="12.625" IsExpanded="true" />
         <EntityTypeShape EntityType="MyMusicDBModel.Language" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
         <EntityTypeShape EntityType="MyMusicDBModel.LikedSingers" Width="1.5" PointX="5.25" PointY="5.75" IsExpanded="true" />
         <EntityTypeShape EntityType="MyMusicDBModel.LikedSongs" Width="1.5" PointX="10.5" PointY="2.75" IsExpanded="true" />
@@ -16,14 +15,9 @@
         <EntityTypeShape EntityType="MyMusicDBModel.Singer" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="MyMusicDBModel.Song" Width="1.5" PointX="8.25" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="MyMusicDBModel.SongGroup" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
-        <AssociationConnector Association="MyMusicDBModel.FK_comment" ManuallyRouted="false" />
         <AssociationConnector Association="MyMusicDBModel.FK_commentsongid" ManuallyRouted="false" />
         <AssociationConnector Association="MyMusicDBModel.FK_singer2" ManuallyRouted="false" />
         <AssociationConnector Association="MyMusicDBModel.musicgnre_FK" ManuallyRouted="false" />
-        <AssociationConnector Association="MyMusicDBModel.FK_likesinger" ManuallyRouted="false" />
-        <AssociationConnector Association="MyMusicDBModel.FK_likesong" ManuallyRouted="false" />
-        <AssociationConnector Association="MyMusicDBModel.FK_liketext" ManuallyRouted="false" />
-        <AssociationConnector Association="MyMusicDBModel.KarbarRole_Fk" ManuallyRouted="false" />
         <AssociationConnector Association="MyMusicDBModel.FK_singer1" ManuallyRouted="false" />
         <AssociationConnector Association="MyMusicDBModel.musiclan_FK" ManuallyRouted="false" />
         <AssociationConnector Association="MyMusicDBModel.FK_likesingerid" ManuallyRouted="false" />
@@ -32,6 +26,12 @@
         <AssociationConnector Association="MyMusicDBModel.FK_singer3" ManuallyRouted="false" />
         <AssociationConnector Association="MyMusicDBModel.musicsinger_FK" ManuallyRouted="false" />
         <AssociationConnector Association="MyMusicDBModel.musicgp_FK" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="MyMusicDBModel.User" Width="1.5" PointX="3" PointY="12.625" />
+        <AssociationConnector Association="MyMusicDBModel.FK_comment" />
+        <AssociationConnector Association="MyMusicDBModel.FK_likesinger" />
+        <AssociationConnector Association="MyMusicDBModel.FK_likesong" />
+        <AssociationConnector Association="MyMusicDBModel.FK_liketext" />
+        <AssociationConnector Association="MyMusicDBModel.KarbarRole_Fk" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

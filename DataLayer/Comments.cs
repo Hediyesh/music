@@ -21,7 +21,7 @@ namespace DataLayer
         public System.DateTime createDate { get; set; }
         public int songid { get; set; }
     
-        public virtual Karbar Karbar { get; set; }
         public virtual Song Song { get; set; }
+        public virtual User User { get; set; }
     }
 }

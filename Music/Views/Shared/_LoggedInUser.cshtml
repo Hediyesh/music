@@ -1,0 +1,19 @@
+﻿@if (User.Identity.IsAuthenticated)
+{
+    <a href="/Account/LogOut" style="color:black;display:inline-block;" class="btn-sm btn btn-default">
+        <div>
+            Exit <span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>
+
+        </div>
+    </a>
+    @*<a href="/Account/UserPage/@User.Identity.Name" style="color:black;display:inline-block" class="btn-sm btn">
+        <div>
+            User Panel<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+
+        </div>
+    </a>*@
+}
+else
+{
+    <button onclick="Login();" class="btn btn-sm">Login<span class="glyphicon glyphicon-user" aria-hidden="true"></span></button>
+}

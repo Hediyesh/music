@@ -2,6 +2,7 @@
 @{
     ViewBag.Title = "Home Page";
 }
+@Html.AntiForgeryToken()
 <br class="visible-xs" />
 <div id="newest" class="row">
     <div class="row" style="font-size: 20px; margin-right: 4px; color: lightgray">
@@ -30,7 +31,7 @@
                         <br />
                         <b>Song: @item.name</b><br />
                         <b>Singer: @item.singerName</b><br />
-                        <a href="/Home/SongPage/@item.Id"><p  style="color:darkslategray">More info...</p></a>
+                        <a href="/Home/SongPage/@item.Id"><p style="color:darkslategray">More info...</p></a>
                     </div>
 
                 }
@@ -69,7 +70,7 @@
                         <br />
                         <b>Song: @item.name</b><br />
                         <b>Singer: @item.singerName</b><br />
-                        <a href="/Home/SongPage/@item.Id"><p  style="color:darkslategray">More info...</p></a>
+                        <a href="/Home/SongPage/@item.Id"><p style="color:darkslategray">More info...</p></a>
                     </div>
                 }
             </div>

@@ -1,0 +1,135 @@
+﻿@model Music.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+}
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { enctype = "multipart/forms-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal row " style="color:white">
+        <div class="row">
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+            </div>
+            <div class="col-lg-5 col-md-5 col-sm-11 col-xs-11">
+                <h3 style="margin-right:5px">Register</h3>
+            </div>
+        </div>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="row">
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                <div class="col-lg-4 col-md-4  col-sm-11 col-xs-11">
+                    @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.FirstName, new
+                    {
+                        htmlAttributes = new
+                        {
+                            @class = "form-control",
+                       @style = "width:60%",
+                            @id = "FirstName",
+                            @value = ""
+                        }
+                    })
+                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-1 col-xs-1"></div>
+                <div class="col-lg-4 col-md-4 col-sm-11 col-xs-11 ">
+                    @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.LastName, new
+                    {
+                        htmlAttributes = new
+                        {
+                   @class = "form-control",
+                   @style = "width:60%",
+                   @id = "FirstName",
+                   @value = ""
+               }
+                    })
+                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                <div class="col-lg-4 col-md-4  col-sm-11 col-xs-11">
+                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Password, new
+                    {
+                        htmlAttributes = new
+                        {
+                   @class = "form-control",
+                   @style = "width:60%",
+                   @id = "FirstName",
+                   @value = ""
+               }
+                    })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-1 col-xs-1"></div>
+                <div class="col-lg-4 col-md-4 col-sm-11 col-xs-11">
+                    @Html.LabelFor(model => model.RePassword, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.RePassword, new
+                    {
+                        htmlAttributes = new
+                        {
+                   @class = "form-control",
+                   @style = "width:60%",
+                   @id = "FirstName",
+                   @value = ""
+               }
+                    })
+                    @Html.ValidationMessageFor(model => model.RePassword, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                <div class="col-lg-4 col-md-4  col-sm-11 col-xs-11">
+                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Email, new
+                    {
+                        htmlAttributes = new
+                        {
+                   @class = "form-control",
+                   @style = "width:60%",
+                   @id = "FirstName",
+                   @value = ""
+               }
+                    })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-1 col-xs-1"></div>
+                <div class="col-lg-4 col-md-4 col-sm-11 col-xs-11 ">
+                    @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.UserName, new
+                    {
+                        htmlAttributes = new
+                        {
+                   @class = "form-control",
+                   @style = "width:60%",
+                   @id = "FirstName",
+                   @value = ""
+               }
+                    })
+                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <br />
+        </div>
+
+        <div class="row">
+            <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+            <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+                <button onclick="post()" type="submit" class="btn btn-success btn-sm" style="width:100px">Register</button>
+            </div>
+        </div>
+    </div>
+    <br />
+}
+
+
+

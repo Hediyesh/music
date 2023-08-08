@@ -12,14 +12,16 @@
     <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css' rel='stylesheet' />
 </head>
 <body>
-    @Html.AntiForgeryToken()
     <div class="row">
         <nav id="nav" class="navbar navbar-fixed-top navbar-collapse" style="background-color: lightgray;width:100%;margin-left:0px">
             <div class="row">
                 <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11"><h4 onclick="Home()"><strong><i>MUSIC </i><sub>IS MY</sub><i> PASSION</i></strong></h4></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
                 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-11 " style="margin-top:7px">
-                    <h4 onclick="Home()"><strong><i>MUSIC </i><sub>IS MY</sub><i> PASSION</i></strong></h4>
-                    @*where user login*@
+                    @Html.Partial("_LoggedInUser")
                 </div>
                 <div class="col-xs-2"></div>
                 <div class="col-lg-5 col-md-5 col-sm-5 col-xs-11 ">
@@ -32,6 +34,8 @@
 
         </nav>
     </div>
+    <br />
+    <br />
     <br />
     <br />
     <br />
