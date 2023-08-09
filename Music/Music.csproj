@@ -143,6 +143,7 @@
     <Compile Include="Models\CommentViewModel.cs" />
     <Compile Include="Models\ForgotPasswordViewModel.cs" />
     <Compile Include="Models\GenreViewModel.cs" />
+    <Compile Include="Models\LikedSongsViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\RecoveryPasswordViewModel.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
@@ -199,7 +200,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\SingerSong.js" />
     <Content Include="Scripts\Site.js" />
     <Content Include="Songs\01 - Love Talk %28English Version%29.mp3" />
     <Content Include="Songs\5-Seconds-Of-Summer-High-128.mp3" />
@@ -235,6 +235,8 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\RecoveryPassword.cshtml" />
+    <Content Include="Views\Account\UserPage.cshtml" />
+    <Content Include="Views\Account\ChangeUserInformation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

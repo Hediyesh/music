@@ -1,0 +1,102 @@
+﻿@model UserViewModel
+@{
+    ViewBag.Title = "ChangeUserInformation";
+}
+<div class="row" style="color:white">
+    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+        <h2>ChangeUserInformation</h2>
+        <input value="@ViewBag.userid" class="hidden" id="usid" />
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+
+                <hr />  <div class="row">
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                    <div class="col-lg-4 col-md-4  col-sm-11 col-xs-11">
+                        @Html.LabelFor(model => model.firstName, htmlAttributes: new { @class = "control-label", @style = "color:chocolate" })
+                        @Html.EditorFor(model => model.firstName, new
+                        {
+                            htmlAttributes = new
+                            {
+                                @class = "form-control",
+                           @style = "width:60%",
+                                @id = "FirstName",
+                                @value = ""
+                            }
+                        })
+                        @Html.ValidationMessageFor(model => model.firstName, "", new { @class = "text-danger" })
+
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-1 col-xs-1"></div>
+                    <div class="col-lg-4 col-md-4 col-sm-11 col-xs-11 ">
+                        @Html.LabelFor(model => model.lastName, htmlAttributes: new { @class = "control-label", @style = "color:chocolate" })
+                        @Html.EditorFor(model => model.lastName, new
+                        {
+                            htmlAttributes = new
+                            {
+                       @class = "form-control",
+                       @style = "width:60%",
+                       @id = "FirstName",
+                       @value = ""
+                   }
+                        })
+                        @Html.ValidationMessageFor(model => model.lastName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                    <div class="col-lg-4 col-md-4  col-sm-11 col-xs-11">
+                        @Html.LabelFor(model => model.userName, htmlAttributes: new { @class = "control-label", @style = "color:chocolate" })
+                        @Html.EditorFor(model => model.userName, new
+                        {
+                            htmlAttributes = new
+                            {
+                                @class = "form-control",
+                           @style = "width:60%",
+                                @id = "FirstName",
+                                @value = ""
+                            }
+                        })
+                        @Html.ValidationMessageFor(model => model.userName, "", new { @class = "text-danger" })
+
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-1 col-xs-1"></div>
+                    <div class="col-lg-4 col-md-4 col-sm-11 col-xs-11 ">
+                        @Html.LabelFor(model => model.bio, htmlAttributes: new { @class = "control-label", @style = "color:chocolate" })
+                        @Html.EditorFor(model => model.bio, new
+                        {
+                            htmlAttributes = new
+                            {
+                       @class = "form-control",
+                       @style = "width:60%",
+                       @id = "FirstName",
+                       @value = ""
+                   }
+                        })
+                        @Html.ValidationMessageFor(model => model.bio, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.id)
+                <br />
+                <div class="row">
+                    <div class="col-md-9 col-lg-9 "></div>
+                    <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12">
+                        <div class="form-group" style="margin-right:20px">
+                            <div class="">
+                                <input type="submit" value="Save Changes" class="btn btn-success btn-sm" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        }
+    </div>
+    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+</div>
+
+

@@ -12,6 +12,8 @@ namespace Music.Controllers
     public class AccountController : Controller
     {
         MyMusicDBEntities db = new MyMusicDBEntities();
+
+        #region Login and Register
         [Route("Register")]
         public ActionResult Register()
         {
@@ -161,6 +163,8 @@ namespace Music.Controllers
             }
             return View("RecoveryPassword", recovery);
         }
+        #endregion
+
         #region Comment
         [ValidateAntiForgeryToken]
         [HttpPost]
@@ -396,6 +400,161 @@ namespace Music.Controllers
             }
             return Json(false);
         }
+        #endregion
+
+        #region UserPanel
+        [Authorize]
+        public ActionResult UserPage(string id)
+        {
+            if (User.Identity.Name == id)
+            {
+                var user = db.User.Where(w => w.Id.ToString() == id).Single();
+                var likedSongs = db.LikedSongs.Where(w => w.userId == user.Id).ToList();
+                var q1 = likedSongs.Join(db.Song, p => p.SongId, d => d.Id, (p, d) => new { p, d }).Select(m => new
+                {
+                    likeid = m.p.Id,
+                    m.p.SongId,
+                    m.p.userId,
+                    songname = m.d.name,
+                    m.d.singerId
+                });
+                var q2 = q1.Join(db.Singer, p => p.singerId, d => d.Id, (p, d) => new { p, d }).Select(m => new
+                {
+                    m.p.likeid,
+                    m.p.songname,
+                    m.p.singerId,
+                    m.p.SongId,
+                    m.p.userId,
+                    singername = m.d.name
+                });
+                List<LikedSongsViewModel> lslist = new List<LikedSongsViewModel>();
+                foreach (var item in q2)
+                {
+                    LikedSongsViewModel ls = new LikedSongsViewModel();
+                    ls.likeid = item.likeid;
+                    ls.singername = item.singername;
+                    ls.songid = item.SongId;
+                    ls.userid = item.userId;
+                    ls.songname = item.songname;
+                    ls.singerid = item.singerId;
+                    lslist.Add(ls);
+                }
+                ViewBag.likedSongs = lslist.ToList();
+                ViewBag.likedSongsCount = lslist.ToList().Count;
+                var likedTexts = db.LikedSongText.Where(w => w.userId == user.Id).ToList();
+                var q3 = likedTexts.Join(db.Song, p => p.SongId, d => d.Id, (p, d) => new { p, d }).Select(m => new
+                {
+                    likeid = m.p.Id,
+                    m.p.SongId,
+                    m.p.userId,
+                    songname = m.d.name,
+                    m.d.singerId
+                });
+                var q4 = q3.Join(db.Singer, p => p.singerId, d => d.Id, (p, d) => new { p, d }).Select(m => new
+                {
+                    m.p.likeid,
+                    m.p.songname,
+                    m.p.singerId,
+                    m.p.SongId,
+                    m.p.userId,
+                    singername = m.d.name
+                });
+                List<LikedSongsViewModel> lstextlist = new List<LikedSongsViewModel>();
+                foreach (var item in q4)
+                {
+                    LikedSongsViewModel lst = new LikedSongsViewModel();
+                    lst.likeid = item.likeid;
+                    lst.singername = item.singername;
+                    lst.songid = item.SongId;
+                    lst.userid = item.userId;
+                    lst.songname = item.songname;
+                    lst.singerid = item.singerId;
+                    lstextlist.Add(lst);
+                }
+                ViewBag.likedTexts = lstextlist.ToList();
+                ViewBag.likedTextsCount = lstextlist.ToList().Count;
+                var likedSingers = db.LikedSingers.Where(w => w.userId == user.Id).ToList();
+                var q5 = likedSingers.Join(db.Singer, p => p.SingerId, d => d.Id, (p, d) => new { p, d }).Select(m => new
+                {
+                    likeid = m.p.Id,
+                    m.p.SingerId,
+                    m.p.userId,
+                    singername = m.d.name
+                });
+                List<LikedSongsViewModel> lsingerlist = new List<LikedSongsViewModel>();
+                foreach (var item in q5)
+                {
+                    LikedSongsViewModel lsinger = new LikedSongsViewModel();
+                    lsinger.likeid = item.likeid;
+                    lsinger.singername = item.singername;
+                    lsinger.userid = item.userId;
+                    lsinger.singerid = item.SingerId;
+                    lsingerlist.Add(lsinger);
+                }
+                ViewBag.likedSingers = lsingerlist.ToList();
+                ViewBag.likedSingersCount = lsingerlist.ToList().Count;
+                var comments = db.Comments.Where(w => w.userId.ToString() == id).ToList();
+                List<CommentViewModel> comli = new List<CommentViewModel>();
+                foreach (var item in comments)
+                {
+                    CommentViewModel cm = new CommentViewModel();
+                    cm.id = item.Id;
+                    cm.subject = item.subject;
+                    cm.subjectid = item.subjectid;
+                    cm.replied = item.replied;
+                    cm.text = item.text;
+                    cm.userid = item.userId;
+                    cm.createDate = item.createDate;
+                    cm.createDateString = item.createDate.ToString();
+                    comli.Add(cm);
+                }
+                ViewBag.Comments = comli.OrderByDescending(o => o.createDate).Reverse().ToList();
+                ViewBag.CommentsCount = comli.ToList().Count;
+                return View(user);
+
+            }
+            return View("NotAuthenticated");
+        }
+        [Authorize]
+        public ActionResult ChangeUserInformation(int id)
+        {
+            if (User.Identity.Name == id.ToString())
+            {
+                var user = db.User.Where(w => w.Id == id).Single();
+                UserViewModel us = new UserViewModel();
+                us.id = user.Id;
+                us.bio = user.bio;
+                us.firstName = user.firstName;
+                us.lastName = user.lastName;
+                us.userName = user.username;
+                ViewBag.userid = us.id;
+                return View(us);
+
+            }
+            return View("NotAuthenticated");
+        }
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult ChangeUserInformation(UserViewModel us)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = db.User.Where(w => w.Id == us.id).Single();
+                user.firstName = us.firstName;
+                user.lastName = us.lastName;
+                user.bio = us.bio;
+                user.username = us.userName;
+                db.SaveChanges();
+                return RedirectToAction("UserPage/" + us.id.ToString());
+
+            }
+            else
+            {
+                return View(us);
+            }
+        }
+
+
         #endregion
     }
 }

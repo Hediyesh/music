@@ -1,0 +1,166 @@
+﻿@model DataLayer.User
+@{
+    ViewBag.Title = "UserPage";
+}
+
+<div class="row">
+    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10" style="color:white">
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+                <img class="img-circle" style="height:100px;width:100px;color:black;margin-right:10px" src="@Model.pic" />
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12" style="margin-right:10px">
+                <br />
+                <p>Username : @Model.username</p>
+                <p>Register Date : @Model.RegisterDate</p>
+                <p>Bio : @Model.bio</p>
+            </div>
+            <div class="col-lg-6 col-md-6"></div>
+        </div>
+        <br />
+        <div class="tab">
+            <button class="btn btn-info" style="color:white" onclick="openCity(event, 'song')">Liked Songs</button>
+            <button class="btn btn-info" style="color:white" onclick="openCity(event, 'text')">Liked Lyrics</button>
+            <button class="btn btn-info" style="color:white" onclick="openCity(event, 'singer')">Liked Singers</button>
+            <button class="btn btn-info" style="color:white" onclick="openCity(event, 'comment')">Comments List</button>
+        </div>
+        <div id="whole" class="hidden">
+            <div id="song" class="tabcontent">
+                <div class="row">
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10" style="border-radius:10px;border: 1px; border-style: solid; border-color: black;background-color:black">
+                        <br />
+                        @if (ViewBag.likedSongsCount == 0)
+                        {
+                            <p class="text-center">List Is Empty.</p>
+                        }
+                        else
+                        {
+                            foreach (var item in ViewBag.likedSongs)
+                            {
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">Song Name: @item.songname</div>
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">Singer Name: @item.singername</div>
+                                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><a class=" btn btn-info" style="color:white" href="/Home/SongPage/@item.songid">View</a></div>
+                                </div>
+                                <hr />
+                            }
+                        }
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                </div>
+            </div>
+            <div id="text" class="tabcontent">
+                <div class="row">
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10" style="border-radius:10px;border: 1px; border-style: solid; border-color: black;background-color:black">
+                        <br />
+                        @if (ViewBag.likedTextsCount == 0)
+                        {
+                            <p class="text-center">List Is Empty.</p>
+                        }
+                        else
+                        {
+                            foreach (var item in ViewBag.likedTexts)
+                            {
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">Song Name : @item.songname</div>
+                                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5"></div>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><a class=" btn btn-info" style="color:white" href="/Home/SongPage/@item.songid">View</a></div>
+                                </div>
+                                <hr />
+                            }
+                        }
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                </div>
+            </div>
+            <div id="singer" class="tabcontent">
+                <div class="row">
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10" style="border-radius:10px;border:1px;border-style:solid;border-color:black;background-color:black">
+                        <br />
+                        @if (ViewBag.likedSingersCount == 0)
+                        {
+                            <p class="text-center">List Is Empty.</p>
+                        }
+                        else
+                        {
+                            foreach (var item in ViewBag.likedSingers)
+                            {
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">Singer Name : @item.singername</div>
+                                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5"></div>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><a class=" btn btn-info" style="color:white" href="/Home/SingerSongsPage/@item.singerid">View</a></div>
+                                </div>
+                                <hr />
+                            }
+                        }
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                </div>
+            </div>
+            <div id="comment" class="tabcontent">
+                <div class="row">
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10" style="border-radius:10px;border:1px;border-style:solid;border-color:black;background-color:black">
+                        <br />
+                        @if (ViewBag.CommentsCount == 0)
+                        {
+                            <p class="text-center">List Is Empty.</p>
+                        }
+                        else
+                        {
+                            foreach (var item in ViewBag.Comments)
+                            {
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-6">Subject: @item.subject</div>
+                                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-3"></div>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3"><a class=" btn btn-info" style="color:white" href="/Home/@item.subject/@item.subjectid">View</a></div>
+                                    <br />
+                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">Text: @item.text</div>
+                                </div>
+                                <hr />
+                            }
+                        }
+                    </div>
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+                <button id="Change" onclick="Change(@Model.Id)" class="btn btn-warning">Change User Info</button>
+            </div>
+            <div class="col-lg-9 col-md-8"></div>
+        </div>
+    </div>
+    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>
+</div>
+<br />
+@section scripts{
+    <script type="text/javascript">
+        function openCity(evt, cityName) {
+            $("#whole").removeClass("hidden");
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+        function Change(id) {
+            window.document.location = "/Account/ChangeUserInformation/" + id;
+        }
+    </script>
+    }
+
+
