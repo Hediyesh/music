@@ -161,5 +161,241 @@ namespace Music.Controllers
             }
             return View("RecoveryPassword", recovery);
         }
+        #region Comment
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult Comment(string id, string comment, string subject, int subjectid, int replied)
+        {
+            var user = db.User.Single(s => s.Id.ToString() == id);
+            Comments cm = new Comments();
+            CommentViewModel cmModel = new CommentViewModel();
+            var cmid = 0;
+            if (db.Comments.ToList().Count == 0)
+            {
+                cmid = 1;
+            }
+            else
+            {
+                var maxid = db.Comments.OrderByDescending(o => o.Id).First().Id;
+                cmid = maxid + 1;
+            }
+            cm.Id = cmid;
+            cm.text = comment;
+            cm.subject = subject;
+            cm.subjectid = subjectid;
+            cm.createDate = DateTime.Now;
+            cm.userId = user.Id;
+            cm.replied = replied;
+            cm.songid = subjectid;
+            db.Comments.Add(cm);
+            db.SaveChanges();
+            cmModel.id = cm.Id;
+            cmModel.createDate = cm.createDate;
+            cmModel.createDateString = cm.createDate.ToString();
+            cmModel.text = cm.text;
+            cmModel.subject = cm.subject;
+            cmModel.subjectid = cm.subjectid;
+            cmModel.userid = user.Id;
+            cmModel.replied = cm.replied;
+            cmModel.username = user.username;
+            cmModel.userpic = user.pic;
+            return Json(cmModel);
+        }
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult DeleteComment(int id)
+        {
+            var comment = db.Comments.Single(s => s.Id == id);
+            if (comment.replied == 0 && db.Comments.Any(w => w.replied == comment.Id))
+            {
+                comment.text = "This comment is deleted.";
+            }
+            else
+            {
+                db.Comments.Remove(comment);
+            }
+            db.SaveChanges();
+            bool bl = db.Comments.Any(w => w.replied == comment.Id);
+            return Json(bl);
+        }
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult EditComment(int commentid, string comment)
+        {
+            var comment1 = db.Comments.Single(s => s.Id == commentid);
+            comment1.text = comment;
+            db.SaveChanges();
+            var cmModel = new CommentViewModel();
+            cmModel.id = comment1.Id;
+            cmModel.text = comment1.text;
+            cmModel.replied = comment1.replied;
+            return Json(cmModel);
+        }
+        #endregion
+
+        #region Like
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult LikeSong(string userid, int musicid)
+        {
+            var likesong = db.LikedSongs.Where(w => w.userId.ToString() == userid && w.SongId == musicid).ToList().FirstOrDefault();
+            if (likesong == null)
+            {
+                var music = db.Song.Where(w => w.Id == musicid).ToList().First();
+                var user = db.User.Where(w => w.Id.ToString() == userid).ToList().First();
+                LikedSongs ls = new LikedSongs();
+                if (db.LikedSongs.ToList().Count == 0)
+                {
+                    ls.Id = 1;
+                }
+                else
+                {
+                    var max = db.LikedSongs.OrderByDescending(o => o.Id).ToList().First().Id;
+                    ls.Id = max + 1;
+                }
+                ls.userId = user.Id;
+                ls.SongId = music.Id;
+                db.LikedSongs.Add(ls);
+                music.likes = music.likes + 1;
+                db.SaveChanges();
+                return Json(true);
+            }
+            return Json(false);
+        }
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult IsLiked(string identityname, int musicid)
+        {
+            var likesong = db.LikedSongs.Where(w => w.userId.ToString() == identityname && w.SongId == musicid).ToList().FirstOrDefault();
+            if (likesong != null)
+            {
+                //liked = true
+                return Json(true);
+            }
+            //not liked = false
+            return Json(false);
+        }
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult UnLikeSong(string userid, int musicid)
+        {
+            var likesong = db.LikedSongs.Where(w => w.userId.ToString() == userid && w.SongId == musicid).ToList().First();
+            if (likesong != null)
+            {
+                var music = db.Song.Where(w => w.Id == musicid).ToList().First();
+                db.LikedSongs.Remove(likesong);
+                music.likes = music.likes - 1;
+                db.SaveChanges();
+                return Json(true);
+            }
+            return Json(false);
+        }
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult IsLikedText(string identityname, int musicid)
+        {
+            var likeText = db.LikedSongText.Where(w => w.userId.ToString() == identityname && w.SongId == musicid).ToList().FirstOrDefault();
+            if (likeText != null)
+            {
+                //liked = true
+                return Json(true);
+            }
+            //not liked = false
+            return Json(false);
+        }
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult LikeText(string userid, int musicid)
+        {
+            var liketext = db.LikedSongText.Where(w => w.userId.ToString() == userid && w.SongId == musicid).ToList().FirstOrDefault();
+            if (liketext == null)
+            {
+                var music = db.Song.Where(w => w.Id == musicid).ToList().First();
+                var user = db.User.Where(w => w.Id.ToString() == userid).ToList().First();
+                LikedSongText lt = new LikedSongText();
+                if (db.LikedSongText.ToList().Count == 0)
+                {
+                    lt.Id = 1;
+                }
+                else
+                {
+                    var max = db.LikedSongText.OrderByDescending(o => o.Id).ToList().First().Id;
+                    lt.Id = max + 1;
+                }
+                lt.userId = user.Id;
+                lt.SongId = music.Id;
+                db.LikedSongText.Add(lt);
+                db.SaveChanges();
+                return Json(true);
+            }
+            return Json(false);
+        }
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult UnLikeText(string userid, int musicid)
+        {
+            var liketext = db.LikedSongText.Where(w => w.userId.ToString() == userid && w.SongId == musicid).ToList().First();
+            if (liketext != null)
+            {
+                db.LikedSongText.Remove(liketext);
+                db.SaveChanges();
+                return Json(true);
+            }
+            return Json(false);
+        }
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult IsLikedSinger(string identityname, int singerid)
+        {
+            var likesinger = db.LikedSingers.Where(w => w.userId.ToString() == identityname && w.SingerId == singerid).ToList().FirstOrDefault();
+            if (likesinger != null)
+            {
+                //liked = true
+                return Json(true);
+            }
+            //not liked = false
+            return Json(false);
+        }
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult LikeSinger(string userid, int singerid)
+        {
+            var likesinger = db.LikedSingers.Where(w => w.userId.ToString() == userid && w.SingerId == singerid).ToList().FirstOrDefault();
+            if (likesinger == null)
+            {
+                var singer = db.Singer.Where(w => w.Id == singerid).ToList().First();
+                var user = db.User.Where(w => w.Id.ToString() == userid).ToList().First();
+                LikedSingers ls = new LikedSingers();
+                if (db.LikedSingers.ToList().Count == 0)
+                {
+                    ls.Id = 1;
+                }
+                else
+                {
+                    var max = db.LikedSingers.OrderByDescending(o => o.Id).ToList().First().Id;
+                    ls.Id = max + 1;
+                }
+                ls.userId = user.Id;
+                ls.SingerId = singer.Id;
+                db.LikedSingers.Add(ls);
+                db.SaveChanges();
+                return Json(true);
+            }
+            return Json(false);
+        }
+        [ValidateAntiForgeryToken]
+        [HttpPost]
+        public ActionResult UnLikeSinger(string userid, int singerid)
+        {
+            var likesinger = db.LikedSingers.Where(w => w.userId.ToString() == userid && w.SingerId == singerid).ToList().FirstOrDefault();
+            if (likesinger != null)
+            {
+                db.LikedSingers.Remove(likesinger);
+                db.SaveChanges();
+                return Json(true);
+            }
+            return Json(false);
+        }
+        #endregion
     }
 }

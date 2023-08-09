@@ -20,8 +20,10 @@ namespace DataLayer
         public int replied { get; set; }
         public System.DateTime createDate { get; set; }
         public int songid { get; set; }
+        public string subject { get; set; }
+        public int subjectid { get; set; }
     
-        public virtual Song Song { get; set; }
         public virtual User User { get; set; }
+        public virtual Song Song { get; set; }
     }
 }

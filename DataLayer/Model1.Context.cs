@@ -25,7 +25,6 @@ namespace DataLayer
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Comments> Comments { get; set; }
         public virtual DbSet<Genre> Genre { get; set; }
         public virtual DbSet<Language> Language { get; set; }
         public virtual DbSet<LikedSingers> LikedSingers { get; set; }
@@ -36,5 +35,6 @@ namespace DataLayer
         public virtual DbSet<Song> Song { get; set; }
         public virtual DbSet<SongGroup> SongGroup { get; set; }
         public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<Comments> Comments { get; set; }
     }
 }

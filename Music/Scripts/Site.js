@@ -116,7 +116,7 @@ function ToggleHeart(userid, singerid) {
     var b = d.classList.contains("glyphicon-heart-empty");
     var token = document.getElementsByName("__RequestVerificationToken")[0].value;
     if (b == true) {
-        //byd like she
+        //like
         $.ajax({
             type: "post",
             dataType: 'json',
@@ -133,7 +133,7 @@ function ToggleHeart(userid, singerid) {
         })
     }
     else {
-        //like brdshte she
+        //unlike
         $.ajax({
             type: "post",
             dataType: 'json',

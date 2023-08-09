@@ -201,7 +201,6 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\SingerSong.js" />
     <Content Include="Scripts\Site.js" />
-    <Content Include="Scripts\Song.js" />
     <Content Include="Songs\01 - Love Talk %28English Version%29.mp3" />
     <Content Include="Songs\5-Seconds-Of-Summer-High-128.mp3" />
     <Content Include="Songs\Nirvana - INNA.mp3" />

@@ -17,9 +17,9 @@ namespace DataLayer
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Song()
         {
-            this.Comments = new HashSet<Comments>();
             this.LikedSongs = new HashSet<LikedSongs>();
             this.LikedSongText = new HashSet<LikedSongText>();
+            this.Comments = new HashSet<Comments>();
         }
     
         public int Id { get; set; }
@@ -37,8 +37,6 @@ namespace DataLayer
         public int likes { get; set; }
         public int viewCount { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Comments> Comments { get; set; }
         public virtual Genre Genre { get; set; }
         public virtual Language Language { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -47,5 +45,7 @@ namespace DataLayer
         public virtual ICollection<LikedSongText> LikedSongText { get; set; }
         public virtual Singer Singer { get; set; }
         public virtual SongGroup SongGroup { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Comments> Comments { get; set; }
     }
 }

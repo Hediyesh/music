@@ -10,6 +10,8 @@
     <Property Name="replied" Type="int" Nullable="false" />
     <Property Name="createDate" Type="date" Nullable="false" />
     <Property Name="songid" Type="int" Nullable="false" />
+    <Property Name="subject" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="subjectid" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Genre">
     <Key>

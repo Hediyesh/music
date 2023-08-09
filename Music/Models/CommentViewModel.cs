@@ -12,6 +12,8 @@ namespace Music
         public string createDateString { get; set; }
         public int songid { get; set; }
         public string text { get; set; }
+        public string subject { get; set; }
+        public int subjectid { get; set; }
         public string userpic { get; set; }
         public string username { get; set; }
         public int userid { get; set; }

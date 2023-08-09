@@ -1,18 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="MyMusicDBModelStoreContainer" CdmEntityContainer="MyMusicDBEntities">
-    <EntitySetMapping Name="Comments">
-      <EntityTypeMapping TypeName="MyMusicDBModel.Comments">
-        <MappingFragment StoreEntitySet="Comments">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="text" ColumnName="text" />
-          <ScalarProperty Name="userId" ColumnName="userId" />
-          <ScalarProperty Name="replied" ColumnName="replied" />
-          <ScalarProperty Name="createDate" ColumnName="createDate" />
-          <ScalarProperty Name="songid" ColumnName="songid" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Genre">
       <EntityTypeMapping TypeName="MyMusicDBModel.Genre">
         <MappingFragment StoreEntitySet="Genre">
@@ -119,6 +107,20 @@
           <ScalarProperty Name="emailAddress" ColumnName="emailAddress" />
           <ScalarProperty Name="lastName" ColumnName="lastName" />
           <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comments">
+      <EntityTypeMapping TypeName="MyMusicDBModel.Comments">
+        <MappingFragment StoreEntitySet="Comments">
+          <ScalarProperty Name="subjectid" ColumnName="subjectid" />
+          <ScalarProperty Name="subject" ColumnName="subject" />
+          <ScalarProperty Name="songid" ColumnName="songid" />
+          <ScalarProperty Name="createDate" ColumnName="createDate" />
+          <ScalarProperty Name="replied" ColumnName="replied" />
+          <ScalarProperty Name="userId" ColumnName="userId" />
+          <ScalarProperty Name="text" ColumnName="text" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
