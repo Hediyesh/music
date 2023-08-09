@@ -16,11 +16,11 @@
 .rtl {
     direction: rtl
 }
-
+/*song lyric*/
 .note {
     background: rgba(128, 128, 128, 0.1);
 }
-
+/*song share*/
 .sharelink {
     color: darksalmon;
     background: rgba(128, 128, 128, 0.1);
